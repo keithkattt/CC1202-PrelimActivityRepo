@@ -8,25 +8,32 @@ int randomNum();
 
 
 int main(){
-    //call randomNum function
-    randomNum();
+    int gameRound = 0;
+    int randomNum1 = randomNum(10);
+    int randomNum2 = randomNum(5);
 
+    printf("%d\n", randomNum1);
+    printf("%d\n", randomNum2);
+    
     return 0;
 }
 
-int randomNum(){
+int randomNum(int n){
     //Lower Boundary    
     int lowerBoundary = 1;
     //Upper Boundary
     int upperBoundary = 100;
 
+    int rounds, num = 1;
+
     //random seed and time based on current line
     srand(time(NULL));
 
-    //loop random generated number up to 5 times
-    for (int i = 1; i <=5; i++){
-        printf("%d\n", rand() % (upperBoundary - lowerBoundary + 1));
+    for(rounds = 1; rounds <= n; rounds++){
+        num = (rand() % (upperBoundary - lowerBoundary + 1));
     }
+    
+    return num;
 }
 
 
