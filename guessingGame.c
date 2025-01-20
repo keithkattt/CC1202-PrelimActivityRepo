@@ -3,18 +3,13 @@
 #include <stdlib.h>
 #include <time.h>
 
-//Generates random num from 1 - 100
+//Generates random num from 1 - 100, parameter for how many times you use it
 int randomNum();
 
 
 int main(){
-    int gameRound = 0;
-    int randomNum1 = randomNum(10);
-    int randomNum2 = randomNum(5);
 
-    printf("%d\n", randomNum1);
-    printf("%d\n", randomNum2);
-    
+
     return 0;
 }
 
