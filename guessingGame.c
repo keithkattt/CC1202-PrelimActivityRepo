@@ -6,29 +6,36 @@
 //Generates random num from 1 - 100, parameter for how many times you use it
 int randomNum();
 
+//Prompts the user and returns the value 
+int userInput();
 
 int main(){
+    
+    int userGuess = userInput();
+    int computerNum = randomNum(0);
+
+    printf("%d", computerNum);
 
 
     return 0;
 }
 
-int randomNum(int n){
+
+int randomNum(){
     //Lower Boundary    
     int lowerBoundary = 1;
     //Upper Boundary
     int upperBoundary = 100;
 
-    int rounds, num = 1;
-
     //random seed and time based on current line
     srand(time(NULL));
 
-    for(rounds = 1; rounds <= n; rounds++){
-        num = (rand() % (upperBoundary - lowerBoundary + 1));
-    }
-    
-    return num;
+    return (rand() % (upperBoundary - lowerBoundary + 1) + lowerBoundary);
 }
 
-
+int userInput(){
+    int numInput;
+    printf("What is your guess?: ");
+    scanf("%d", &numInput);
+    return numInput;
+}
