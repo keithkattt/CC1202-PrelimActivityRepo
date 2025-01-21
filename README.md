@@ -12,3 +12,5 @@ After the above instruction is done add your additional operation (dynamic) whic
 
 
 The third program is a racing game using random number generation that would use letters A, B, C, D, and E and the car identity in the race. The message instruction before the race tarts, and the ranking result after finishing the race, as who is the Champion, 1st runners up, and 2nd runners up.
+
+##This C program uses "MS-DOS" specific libraries that will NOT work for other OS that isn't windows.
