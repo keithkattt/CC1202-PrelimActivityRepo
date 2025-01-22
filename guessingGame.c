@@ -19,7 +19,7 @@ int main(){
     
     SetColorAndBackground(6, 0);
     guessingGameHeader();
-    SetColorAndBackground(7, 0);
+    ResetColor();
     welcomeMessage();
 
     int computerNum = randomNum();
@@ -35,15 +35,19 @@ int main(){
 void gameRound(int inputGuess, int compNum){
    for(int i = 1; i <= 11; i++){
         if (i == 11){
+            SetColorAndBackground(12, 0);
             const char *gameOver ={"You have guessed 10 times: GAME OVER!!!\n"};
             print_in_style(gameOver, 10);
+            ResetColor();
             break;
         }
         inputGuess = userInput();
 
         if(inputGuess == compNum){
+            SetColorAndBackground(6, 0);
             const char *congrats = {"Congratulations! You guessed the number correctly!\n"};
             print_in_style(congrats, 10);
+            ResetColor();
             break;
         }else if(inputGuess < 1 || inputGuess > 100){
             SetColorAndBackground(4, 0);
