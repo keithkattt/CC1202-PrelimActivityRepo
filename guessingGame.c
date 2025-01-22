@@ -11,7 +11,8 @@ void guessingGameHeader(); //Prints ASCII art
 void welcomeMessage(); //Prints welcome message
 void print_in_style(const char *str, int delay); //Prints in style
 void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 256
-
+void ResetColor(); //Resets the color and background
+void gameRound(); //Loop 10 times, if the user guess is wrong, prompt the user to guess again, if the user guess is correct, break the loop
 
 int main(){
 
@@ -21,13 +22,47 @@ int main(){
     SetColorAndBackground(7, 0);
     welcomeMessage();
 
-    int userGuess = userInput();
-    int computerNum = randomNum(0);
-
-    printf("%d", computerNum);
-
+    int computerNum = randomNum();
+    int userGuess;
+    
+    gameRound(userGuess, computerNum);
+    
+   
 
     return 0;
+}
+
+void gameRound(int inputGuess, int compNum){
+   for(int i = 1; i <= 11; i++){
+        if (i == 11){
+            const char *gameOver ={"You have guessed 10 times: GAME OVER!!!\n"};
+            print_in_style(gameOver, 10);
+            break;
+        }
+        inputGuess = userInput();
+
+        if(inputGuess == compNum){
+            const char *congrats = {"Congratulations! You guessed the number correctly!\n"};
+            print_in_style(congrats, 10);
+            break;
+        }else if(inputGuess < 1 || inputGuess > 100){
+            SetColorAndBackground(4, 0);
+            const char *wrongInput={"Please enter a number between 1 and 100\n"};
+            print_in_style(wrongInput, 10);
+            ResetColor();
+            i--;
+        }else if(inputGuess < compNum){
+            char higher[100]; 
+            snprintf(higher, sizeof(higher),"The number is higher than %d\n", inputGuess);
+            print_in_style(higher, 10);
+        }else if(inputGuess > compNum){
+            char lower[100]; 
+            snprintf(lower, sizeof(lower),"The number is lower than %d\n", inputGuess);
+            print_in_style(lower, 10);
+        }else{
+            printf("Invalid input\n");
+        }
+    }   
 }
 
 
@@ -46,7 +81,7 @@ int randomNum(){
 int userInput(){
     int numInput;
     const char *userInput = {"What is your guess?: "};
-    print_in_style(userInput, 50);
+    print_in_style(userInput, 20);
     scanf("%d", &numInput);
     return numInput;
 }
@@ -96,4 +131,8 @@ void SetColorAndBackground(int ForgC, int BackC)
      WORD wColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
      SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), wColor);
      return;
+}
+
+void ResetColor(){
+    SetColorAndBackground(7, 0);
 }
