@@ -10,10 +10,15 @@ int userInput(); //Prompts the user and returns the value
 void guessingGameHeader(); //Prints ASCII art
 void welcomeMessage(); //Prints welcome message
 void print_in_style(const char *str, int delay); //Prints in style
+void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 256
+
 
 int main(){
 
+    
+    SetColorAndBackground(6, 0);
     guessingGameHeader();
+    SetColorAndBackground(7, 0);
     welcomeMessage();
 
     int userGuess = userInput();
@@ -69,11 +74,11 @@ void welcomeMessage(){
         "Welcome to the guessing game!",
         "The computer will generate a random number between 1 and 100.",
         "You will have to guess the number.",
-        "You have 10 treis to guess the number.",
+        "You have 10 tries to guess the number.",
     };        
 
     for(int i = 0; i < 4; i++){
-        print_in_style(welcome[i], 50);
+        print_in_style(welcome[i], 20);
         printf("\n");
     }
 
@@ -84,4 +89,11 @@ void print_in_style(const char *str, int delay){
         printf("%c", str[i]);
         Sleep(delay);
     }
+}
+
+void SetColorAndBackground(int ForgC, int BackC)
+{
+     WORD wColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
+     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), wColor);
+     return;
 }
