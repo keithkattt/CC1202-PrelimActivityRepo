@@ -10,6 +10,7 @@ void SplashScreen();
 void print_in_style(const char *str, int delay);
 void SetColorAndBackground(int ForgC, int BackC);
 void ResetColor();
+void gotoxy(int x, int y);
 
 int main(){
     SplashScreen();
@@ -19,7 +20,7 @@ int main(){
 void SplashScreen() {
     // Print each line of the splash screen with a typewriter effect
     const char *splash[] = {
-    "***********************************************************************************************************\n"
+    "***********************************************************************************************************",
     "*         .o.       ooooo        oooo    oooo ooooo   ooooo       .o.       ooooo              .o.        *",
     "*        .888.      `888'        `888   .8P'  `888'   `888'      .888.      `888'             .888.       *",
     "*       .8\"888.      888          888  d8'     888     888      .8\"888.      888             .8\"888.      *",
@@ -27,17 +28,28 @@ void SplashScreen() {
     "*     .88ooo8888.    888          888`88b.     888     888    .88ooo8888.    888           .88ooo8888.    *",
     "*    .8'     `888.   888       o  888  `88b.   888     888   .8'     `888.   888       o  .8'     `888.   *",
     "*   o88o     o8888o o888ooooood8 o888o  o888o o888o   o888o o88o     o8888o o888ooooood8 o88o     o8888o  *",
-    "***********************************************************************************************************"
+    "***********************************************************************************************************",
     };
 
-    for (int i = 0; i < 8; i++) {
-         SetColorAndBackground(6, 0);
-        print_in_style(splash[i], 1);
+    int y = 5;  // Initial y-coordinate for the splash screen
+    system("cls");  // Clear the screen
+
+    // Loop through each line of the splash screen
+    for (int i = 0; i < 9; i++) {
+        gotoxy(15, y);  // Set the cursor position
+        y++;  // Increment y-coordinate for the next line
+        SetColorAndBackground(6, 0);
+        print_in_style(splash[i], 5);
         putchar('\n');  // Newline after each line is printed
     }
-    ResetColor();
+    ResetColor();  // Reset the text color and background
 
-    Sleep(10);  // Sleep for  milliseconds before the next loop 
+    // Wait for a key press before continuing
+    gotoxy(15, 15);
+    print_in_style("Press any key to continue...", 20);
+    _getch();
+    system("cls");  // Clear the screen
+    return;
 }
 
 void print_in_style(const char *str, int delay){
@@ -46,6 +58,15 @@ void print_in_style(const char *str, int delay){
         Sleep(delay);
     }
 }
+
+void gotoxy(int x, int y) //function definition
+     {
+            COORD xyPos = {0, 0};   //initialization cursor position
+            xyPos.X = x;   xyPos.Y =  y;  //assign coordinates
+
+            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),xyPos);
+            return;
+    }
 
 void SetColorAndBackground(int ForgC, int BackC)
 {

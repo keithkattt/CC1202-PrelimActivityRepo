@@ -16,6 +16,7 @@ void displayMenu(int option) {
     system("cls"); // Clear the screen
 
     setColor(10); // Set text color to green
+    gotoxy(20, 10);
     printf("*******************************\n");
     printf("      ASCII Menu Design\n");
     printf("*******************************\n\n");

@@ -16,8 +16,9 @@ void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 
 void ResetColor(); //Resets the color and background
 void GuessingGamePlay(); //Main function
 void PlayAgain(); //Asks the user if they want to play again
+void MainGuessingGame(); //Main function
 
-int main(){
+void MainGuessingGame(){
 
     animateSplashScreen();
     
@@ -35,7 +36,6 @@ int main(){
 
     return 0;
 }
-
 
 void GuessingGamePlay(int uc, int cc) {
     int a = 1; // Attempt counter
