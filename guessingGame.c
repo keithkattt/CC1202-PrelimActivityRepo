@@ -14,8 +14,8 @@ void welcomeMessage(); //Prints welcome message
 void print_in_style(const char *str, int delay); //Prints in style
 void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 256
 void ResetColor(); //Resets the color and background
-void GuessingGameMain(); //Main function
-void SplashScreen(); //Splash screen animation
+void GuessingGamePlay(); //Main function
+void PlayAgain(); //Asks the user if they want to play again
 
 int main(){
 
@@ -29,7 +29,7 @@ int main(){
     int computerNum = randomNum();
     int userGuess;
     
-    GuessingGameMain(userGuess, computerNum);
+    GuessingGamePlay(userGuess, computerNum);
     
    
 
@@ -37,7 +37,7 @@ int main(){
 }
 
 
-void GuessingGameMain(int uc, int cc) {
+void GuessingGamePlay(int uc, int cc) {
     int a = 1; // Attempt counter
     int s = 0; // Score variable
     
@@ -123,6 +123,20 @@ int userInput(){
     return numInput;
 }
 
+void PlayAgain(){
+    char playAgain;
+    const char *playAgainPrompt = {"Would you like to play again? (Y/N): "};
+    print_in_style(playAgainPrompt, 20);
+    scanf(" %c", &playAgain);
+    if(playAgain == 'Y' || playAgain == 'y'){
+        main();
+    } else {
+        const char *goodbye = {"Goodbye!"};
+        print_in_style(goodbye, 20);
+        exit(0);
+    }
+}
+
 void guessingGameHeader(){
     printf(" $$$$$$\\                                          $$\\                            $$$$$$\\                                    \n");
     printf("$$  __$$\\                                         \\__|                          $$  __$$\\                                   \n");
@@ -139,26 +153,6 @@ void guessingGameHeader(){
     printf("                                                                $$\\   $$ |                                                  \n");
     printf("                                                                \\$$$$$$  |                                                  \n");
     printf("                                                                 \\______/                                                   \n");
-}
-
-void SplashScreen() {
-    // Print each line of the splash screen with a typewriter effect
-    const char *splash[] = {
-    "       .o.       ooooo        oooo    oooo ooooo   ooooo       .o.       ooooo              .o.       ",
-    "     .888.      `888'        `888   .8P'  `888'   `888'      .888.      `888'             .888.      ",
-    "    .8\"888.      888          888  d8'     888     888      .8\"888.      888             .8\"888.     ",
-    "   .8' `888.     888          88888[       888ooooo888     .8' `888.     888            .8' `888.    ",
-    "  .88ooo8888.    888          888`88b.     888     888    .88ooo8888.    888           .88ooo8888.   ",
-    " .8'     `888.   888       o  888  `88b.   888     888   .8'     `888.   888       o  .8'     `888.  ",
-    "o88o     o8888o o888ooooood8 o888o  o888o o888o   o888o o88o     o8888o o888ooooood8 o88o     o8888o \n\n",
-    };
-
-    for (int i = 0; i < 7; i++) {
-        print_in_style(splash[i], 10);
-        putchar('\n');  // Newline after each line is printed
-    }
-
-    Sleep(500);  // Sleep for 500 milliseconds before the next loop 
 }
 
 void welcomeMessage(){
