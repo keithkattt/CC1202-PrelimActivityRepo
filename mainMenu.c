@@ -50,29 +50,30 @@ int main() {
 
         // Get user input
         input = _getch();
-
-        if (input == 'w' || input == 'W') {
-            selected--; // Move up
-            if (selected < 1) {
-                selected = 4; // Wrap to bottom
+        if (input == 0 || input == 224){
+            if (input == 65) {
+                selected--; // Move up
+                if (selected < 1) {
+                    selected = 4; // Wrap to bottom
+                }
+            } else if (input == 66) {
+                selected++; // Move down
+                if (selected > 4) {
+                    selected = 1; // Wrap to top
+                }
+            } else if (input == '\r') { // Enter key
+                system("cls"); // Clear the screen
+                printf("\033[44;37m"); // Blue background, white text
+                printf("===================================\n");
+                printf("       You selected option %d      \n", selected);
+                printf("===================================\n");
+                printf("\033[0m"); // Reset colors
+                if (selected == 4) {
+                    break; // Exit the program
+                }
+                printf("Press any key to go back to the menu...\n");
+                _getch(); // Wait for user input
             }
-        } else if (input == 's' || input == 'S') {
-            selected++; // Move down
-            if (selected > 4) {
-                selected = 1; // Wrap to top
-            }
-        } else if (input == '\r') { // Enter key
-            system("cls"); // Clear the screen
-            printf("\033[44;37m"); // Blue background, white text
-            printf("===================================\n");
-            printf("       You selected option %d      \n", selected);
-            printf("===================================\n");
-            printf("\033[0m"); // Reset colors
-            if (selected == 4) {
-                break; // Exit the program
-            }
-            printf("Press any key to go back to the menu...\n");
-            _getch(); // Wait for user input
         }
     }
 
