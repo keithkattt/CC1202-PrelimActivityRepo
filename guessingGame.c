@@ -4,6 +4,7 @@
 #include <time.h>
 #include <conio.h>
 #include <windows.h>
+#include <process.h>
 #include <unistd.h>
 
 int randomNum();//Generates random num from 1 - 100, parameter for how many times you use it 
@@ -13,12 +14,12 @@ void welcomeMessage(); //Prints welcome message
 void print_in_style(const char *str, int delay); //Prints in style
 void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 256
 void ResetColor(); //Resets the color and background
-void gameRound(); //Loop 10 times, if the user guess is wrong, prompt the user to guess again, if the user guess is correct, break the loop
 void GuessingGameMain(); //Main function
-
+void SplashScreen(); //Splash screen animation
 
 int main(){
 
+    animateSplashScreen();
     
     SetColorAndBackground(6, 0);
     guessingGameHeader();
@@ -35,77 +36,72 @@ int main(){
     return 0;
 }
 
-void gameRound(int inputGuess, int compNum){
 
+void GuessingGameMain(int uc, int cc) {
+    int a = 1; // Attempt counter
+    int s = 0; // Score variable
+    
+    // Game loop: Allow up to 10 attempts
+    do {
+        // Prompt the user to enter a guess
+        char prompt[100];
+        snprintf(prompt, sizeof(prompt),"Attempt %d: Enter your guess: ", a);
+        print_in_style(prompt, 10);
+        scanf("%d", &uc); // Read the user's input
 
+        // Check if the guess is correct
+        if (uc == cc) {
+            const char *correct = {"Correct! You've guessed the number!\n"};
+            print_in_style(correct, 10);
 
+            // Calculate the score based on the number of attempts used
+            s = (11 - a) * 10; // Score calculation: higher for fewer attempts
+            char calcScore[100];
+            snprintf(calcScore, sizeof(calcScore),"Your score: %d/10 = %d%%\n", (11 - a), s);
+            print_in_style(calcScore, 10);
+            break; // Exit the loop since the guess is correct
+        } else {
+            // Check if the guess is outside the valid range (1-100)
+            if (uc < 1 || uc > 100) {
+                SetColorAndBackground(4, 0);
+                const char *invalid = {"Invalid number! Please enter a number between 1 and 100.\n"};
+                print_in_style(invalid, 10);
+                ResetColor();
+                continue; // Skip the rest of the loop for invalid input
+            }
 
+            // Provide feedback for incorrect guesses
+            if (abs(uc - cc) <= 5) { // Check if the guess is within 5 of the correct number
+                const char *almstThere = {"Almost there! "};
+                print_in_style(almstThere, 10);
+            }
+            if (uc < cc) {
+                const char *tooLow = {"Too low! Try again.\n"};
+                print_in_style(tooLow, 10);
+            } else {
+                const char *tooHigh = {"Too high! Try again.\n"};
+                print_in_style(tooHigh, 10);
+            }
+        }
 
+        a++; // Increment the attempt counter
 
+    } while (a <= 10); // Allow up to 10 attempts
 
+    // If the user fails to guess within 10 attempts, end the game
+    if (a > 10 && uc != cc) {
+        char gameOver[100];
+        SetColorAndBackground(12, 0);
+        snprintf(gameOver, sizeof(gameOver),"Sorry, you've used all your attempts! The correct number was %d.\n", cc);
+        print_in_style(gameOver, 10);
+        char gameOverScore[100];
+        snprintf(gameOverScore, sizeof(gameOverScore),"Your score: 0/10 = 0%%\n");
+        print_in_style(gameOverScore, 10);
+        ResetColor();
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    for(int i = 1;    i <= 11; i++){
-//         if (i == 11){
-//             SetColorAndBackground(12, 0);
-//             const char *gameOver ={"You have guessed 10 times: GAME OVER!!!\n"};
-//             print_in_style(gameOver, 10);
-//             ResetColor();
-//             break;
-//         }
-//         inputGuess = userInput();
-
-//         if(inputGuess == compNum){
-//             SetColorAndBackground(6, 0);
-//             const char *congrats = {"Congratulations! You guessed the number correctly!\n"};
-//             print_in_style(congrats, 10);
-//             ResetColor();
-//             break;
-//         }else if(inputGuess < 1 || inputGuess > 100){
-//             SetColorAndBackground(4, 0);
-//             const char *wrongInput={"Please enter a number between 1 and 100\n"};
-//             print_in_style(wrongInput, 10);
-//             ResetColor();
-//             i--;
-//         }else if(inputGuess < compNum){
-//             char higher[100]; 
-//             snprintf(higher, sizeof(higher),"The number is higher than %d\n", inputGuess);
-//             print_in_style(higher, 10);
-//         }else if(inputGuess > compNum){
-//             char lower[100]; 
-//             snprintf(lower, sizeof(lower),"The number is lower than %d\n", inputGuess);
-//             print_in_style(lower, 10);
-//         }else{
-//             printf("Invalid input\n");
-//         }
-//     }   
+    return; // Exit the program
 }
-
 
 int randomNum(){
     //Lower Boundary    
@@ -143,6 +139,26 @@ void guessingGameHeader(){
     printf("                                                                $$\\   $$ |                                                  \n");
     printf("                                                                \\$$$$$$  |                                                  \n");
     printf("                                                                 \\______/                                                   \n");
+}
+
+void SplashScreen() {
+    // Print each line of the splash screen with a typewriter effect
+    const char *splash[] = {
+    "       .o.       ooooo        oooo    oooo ooooo   ooooo       .o.       ooooo              .o.       ",
+    "     .888.      `888'        `888   .8P'  `888'   `888'      .888.      `888'             .888.      ",
+    "    .8\"888.      888          888  d8'     888     888      .8\"888.      888             .8\"888.     ",
+    "   .8' `888.     888          88888[       888ooooo888     .8' `888.     888            .8' `888.    ",
+    "  .88ooo8888.    888          888`88b.     888     888    .88ooo8888.    888           .88ooo8888.   ",
+    " .8'     `888.   888       o  888  `88b.   888     888   .8'     `888.   888       o  .8'     `888.  ",
+    "o88o     o8888o o888ooooood8 o888o  o888o o888o   o888o o88o     o8888o o888ooooood8 o88o     o8888o \n\n",
+    };
+
+    for (int i = 0; i < 7; i++) {
+        print_in_style(splash[i], 10);
+        putchar('\n');  // Newline after each line is printed
+    }
+
+    Sleep(500);  // Sleep for 500 milliseconds before the next loop 
 }
 
 void welcomeMessage(){
@@ -183,51 +199,3 @@ void ResetColor(){
 }
 
 
-void GuessingGameMain(int uc, int cc) {
-    int a = 1; // Attempt counter
-    int s = 0; // Score variable
-    
-    // Game loop: Allow up to 10 attempts
-    do {
-        // Prompt the user to enter a guess
-        printf("Attempt %d: Enter your guess: \n", a);
-        scanf("%d", &uc); // Read the user's input
-
-        // Check if the guess is correct
-        if (uc == cc) {
-            printf("Correct! You've guessed the number!\n");
-
-            // Calculate the score based on the number of attempts used
-            s = (11 - a) * 10; // Score calculation: higher for fewer attempts
-            printf("Your score: %d/10 = %d%%\n", (11 - a), s);
-            break; // Exit the loop since the guess is correct
-        } else {
-            // Check if the guess is outside the valid range (1-100)
-            if (uc < 1 || uc > 100) {
-                printf("Invalid number! Please enter a number between 1 and 100.\n");
-                continue; // Skip the rest of the loop for invalid input
-            }
-
-            // Provide feedback for incorrect guesses
-            if (abs(uc - cc) <= 5) { // Check if the guess is within 5 of the correct number
-                printf("Almost there! ");
-            }
-            if (uc < cc) {
-                printf("Too low! Try again.\n");
-            } else {
-                printf("Too high! Try again.\n");
-            }
-        }
-
-        a++; // Increment the attempt counter
-
-    } while (a <= 10); // Allow up to 10 attempts
-
-    // If the user fails to guess within 10 attempts, end the game
-    if (a > 10 && uc != cc) {
-        printf("Sorry, you've used all your attempts! The correct number was %d.\n", cc);
-        printf("Your score: 0/10 = 0%%\n");
-    }
-
-    return; // Exit the program
-}
