@@ -19,8 +19,6 @@ void PlayAgain(); //Asks the user if they want to play again
 void MainGuessingGame(); //Main function
 
 int main(){
-
-    animateSplashScreen();
     
     SetColorAndBackground(6, 0);
     guessingGameHeader();
