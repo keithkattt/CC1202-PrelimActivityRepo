@@ -138,31 +138,31 @@ void guessingGameHeader(){
     SetColorAndBackground(14, 0);
     system("cls");
     putchar('\n');
-    printf(" $$$$$$\\                                          $$\\                            $$$$$$\\                                    \n");
-    printf("$$  __$$\\                                         \\__|                          $$  __$$\\                                   \n");
-    printf("$$ /  \\__|$$\\   $$\\  $$$$$$\\   $$$$$$$\\  $$$$$$$\\ $$\\ $$$$$$$\\   $$$$$$\\        $$ /  \\__| $$$$$$\\  $$$$$$\\$$$$\\   $$$$$$\\  \n");
-    printf("$$ |$$$$\\ $$ |  $$ |$$  __$$\\ $$  _____|$$  _____|$$ |$$  __$$\\ $$  __$$\\       $$ |$$$$\\  \\____$$\\ $$  _$$  _$$\\ $$  __$$\\ \n");
-    printf("$$ |\\_$$ |$$ |  $$ |$$$$$$$$ |\\$$$$$$\\  \\$$$$$$\\  $$ |$$ |  $$ |$$ /  $$ |      $$ |\\_$$ | $$$$$$$ |$$ / $$ / $$ |$$$$$$$$ |\n");
-    printf("$$ |  $$ |$$ |  $$ |$$   ____| \\____$$\\  \\____$$\\ $$ |$$ |  $$ |$$ |  $$ |      $$ |  $$ |$$  __$$ |$$ | $$ | $$ |$$   ____|\n");
-    printf("\\$$$$$$  |\\$$$$$$  |\\$$$$$$$\\ $$$$$$$  |$$$$$$$  |$$ |$$ |  $$ |\\$$$$$$$ |      \\$$$$$$  |\\$$$$$$$ |$$ | $$ | $$ |\\$$$$$$$\\ \n");
-    printf(" \\______/  \\______/  \\_______|\\_______/ \\_______/ \\__|\\__|  \\__| \\____$$ |       \\______/  \\_______|\\__| \\__| \\__| \\_______|\n");
-    printf("                                                                $$\\   $$ |                                                  \n");
-    printf("                                                                \\$$$$$$  |                                                  \n");
-    printf("                                                                 \\______/                                                   \n\n");
+    printf("\t $$$$$$\\                                          $$\\                            $$$$$$\\                                    \n");
+    printf("\t$$  __$$\\                                         \\__|                          $$  __$$\\                                   \n");
+    printf("\t$$ /  \\__|$$\\   $$\\  $$$$$$\\   $$$$$$$\\  $$$$$$$\\ $$\\ $$$$$$$\\   $$$$$$\\        $$ /  \\__| $$$$$$\\  $$$$$$\\$$$$\\   $$$$$$\\  \n");
+    printf("\t$$ |$$$$\\ $$ |  $$ |$$  __$$\\ $$  _____|$$  _____|$$ |$$  __$$\\ $$  __$$\\       $$ |$$$$\\  \\____$$\\ $$  _$$  _$$\\ $$  __$$\\ \n");
+    printf("\t$$ |\\_$$ |$$ |  $$ |$$$$$$$$ |\\$$$$$$\\  \\$$$$$$\\  $$ |$$ |  $$ |$$ /  $$ |      $$ |\\_$$ | $$$$$$$ |$$ / $$ / $$ |$$$$$$$$ |\n");
+    printf("\t$$ |  $$ |$$ |  $$ |$$   ____| \\____$$\\  \\____$$\\ $$ |$$ |  $$ |$$ |  $$ |      $$ |  $$ |$$  __$$ |$$ | $$ | $$ |$$   ____|\n");
+    printf("\t\\$$$$$$  |\\$$$$$$  |\\$$$$$$$\\ $$$$$$$  |$$$$$$$  |$$ |$$ |  $$ |\\$$$$$$$ |      \\$$$$$$  |\\$$$$$$$ |$$ | $$ | $$ |\\$$$$$$$\\ \n");
+    printf("\t \\______/  \\______/  \\_______|\\_______/ \\_______/ \\__|\\__|  \\__| \\____$$ |       \\______/  \\_______|\\__| \\__| \\__| \\_______|\n");
+    printf("\t                                                                $$\\   $$ |                                                  \n");
+    printf("\t                                                                \\$$$$$$  |                                                  \n");
+    printf("\t                                                                 \\______/                                                   \n\n");
 }
 
 void welcomeMessage(){
     SetColorAndBackground(11, 0);
 
     const char *welcome[] = {
-        "The system has chosen a random number between 1 and 100.",
-        "You have 10 attempts to guess the correct number.",
-        "For each guess, you will receive feedback:",
-        "  - 'Too high' if your guess is greater than the number.",
-        "  - 'Too low' if your guess is less than the number.",
-        "  - 'Almost there' if you are within 5 of the correct number.",
-        "Your score will be higher the fewer attempts you take!",
-        "Good luck and have fun!\n"
+        "\t\tThe system has chosen a random number between 1 and 100.",
+        "\t\tYou have 10 attempts to guess the correct number.",
+        "\t\tFor each guess, you will receive feedback:",
+        "\t\t  - 'Too high' if your guess is greater than the number.",
+        "\t\t  - 'Too low' if your guess is less than the number.",
+        "\t\t  - 'Almost there' if you are within 5 of the correct number.",
+        "\t\tYour score will be higher the fewer attempts you take!",
+        "\t\tGood luck and have fun!\n"
     };
 
     for(int i = 0; i < 8; i++){

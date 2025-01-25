@@ -59,34 +59,34 @@ void menu() {
     
     while(1) {
     	system("cls");
-        gotoxy(60, 0);
+        gotoxy(20, 0);
         SetColorAndBackground(11, 0);  // Set text color to bright cyan
         printf(" /$$$$$$$                      /$$                            /$$$$$$                                   \n");
-        gotoxy(60, 1);
+        gotoxy(20, 1);
         printf("| $$__  $$                    |__/                           /$$__  $$                                  \n");
-        gotoxy(60, 2);
+        gotoxy(20, 2);
         printf("| $$  \\ $$  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$  \\__/  /$$$$$$  /$$$$$$/$$$$   /$$$$$$ \n");
-        gotoxy(60, 3);
+        gotoxy(20, 3);
         printf("| $$$$$$$/ |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$ /$$$$ |____  $$| $$_  $$_  $$ /$$__  $$\n");
-        gotoxy(60, 4);
+        gotoxy(20, 4);
         printf("| $$__  $$  /$$$$$$$| $$      | $$| $$  \\ $$| $$  \\ $$      | $$|_  $$  /$$$$$$$| $$ \\ $$ \\ $$| $$$$$$$$\n");
-        gotoxy(60, 5);
+        gotoxy(20, 5);
         printf("| $$  \\ $$ /$$__  $$| $$      | $$| $$  | $$| $$  | $$      | $$  \\ $$ /$$__  $$| $$ | $$ | $$| $$_____/\n");
-        gotoxy(60, 6);
+        gotoxy(20, 6);
         printf("| $$  | $$|  $$$$$$$|  $$$$$$$| $$| $$  | $$|  $$$$$$$      |  $$$$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$\n");
-        gotoxy(60, 7);
+        gotoxy(20, 7);
         printf("|__/  |__/ \\_______/ \\_______/|__/|__/  |__/ \\____  $$       \\______/  \\_______/|__/ |__/ |__/ \\_______/\n");
-        gotoxy(60, 8);
+        gotoxy(20, 8);
         printf("                                             /$$  \\ $$                                                  \n");
-        gotoxy(60, 9);
+        gotoxy(20, 9);
         printf("                                            |  $$$$$$/                                                  \n");
-        gotoxy(60, 10);
+        gotoxy(20, 10);
         printf("                                             \\______/                                                   \n");
-       	gotoxy(60, 11);
+       	gotoxy(60, 13);
 	    PrintEffect("1. Start Race", 10);
-        gotoxy(60, 12);
+        gotoxy(60, 14);
 		PrintEffect("2. Exit", 10);
-        gotoxy(60, 13);
+        gotoxy(60, 15);
 		PrintEffect("Enter your choice: ", 10);
         scanf("%d", &choice);
 
@@ -95,7 +95,7 @@ void menu() {
                 race();
                 break;
             case 2:
-                gotoxy(60, 15);
+                gotoxy(50, 17);
                 PrintEffect("Exiting the game...\n", 5);
                 return;
             default:
