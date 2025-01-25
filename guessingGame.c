@@ -11,7 +11,7 @@ int randomNum();//Generates random num from 1 - 100, parameter for how many time
 int userInput(); //Prompts the user and returns the value
 void guessingGameHeader(); //Prints ASCII art
 void welcomeMessage(); //Prints welcome message
-void print_in_style(const char *str, int delay); //Prints in style
+void PrintEffect(const char *str, int delay); //Prints in style
 void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 256
 void ResetColor(); //Resets the color and background
 void GuessingGamePlay(); //Main function
@@ -20,9 +20,7 @@ void MainGuessingGame(); //Main function
 
 int main(){
     
-    SetColorAndBackground(6, 0);
     guessingGameHeader();
-    ResetColor();
     welcomeMessage();
 
     int computerNum = randomNum();
@@ -44,26 +42,26 @@ void GuessingGamePlay(int uc, int cc) {
         // Prompt the user to enter a guess
         char prompt[100];
         snprintf(prompt, sizeof(prompt),"Attempt %d: Enter your guess: ", a);
-        print_in_style(prompt, 10);
+        PrintEffect(prompt, 10);
         scanf("%d", &uc); // Read the user's input
 
         // Check if the guess is correct
         if (uc == cc) {
             const char *correct = {"Correct! You've guessed the number!\n"};
-            print_in_style(correct, 10);
+            PrintEffect(correct, 10);
 
             // Calculate the score based on the number of attempts used
             s = (11 - a) * 10; // Score calculation: higher for fewer attempts
             char calcScore[100];
             snprintf(calcScore, sizeof(calcScore),"Your score: %d/10 = %d%%\n", (11 - a), s);
-            print_in_style(calcScore, 10);
+            PrintEffect(calcScore, 10);
             break; // Exit the loop since the guess is correct
         } else {
             // Check if the guess is outside the valid range (1-100)
             if (uc < 1 || uc > 100) {
                 SetColorAndBackground(4, 0);
                 const char *invalid = {"Invalid number! Please enter a number between 1 and 100.\n"};
-                print_in_style(invalid, 10);
+                PrintEffect(invalid, 10);
                 ResetColor();
                 continue; // Skip the rest of the loop for invalid input
             }
@@ -71,14 +69,14 @@ void GuessingGamePlay(int uc, int cc) {
             // Provide feedback for incorrect guesses
             if (abs(uc - cc) <= 5) { // Check if the guess is within 5 of the correct number
                 const char *almstThere = {"Almost there! "};
-                print_in_style(almstThere, 10);
+                PrintEffect(almstThere, 10);
             }
             if (uc < cc) {
                 const char *tooLow = {"Too low! Try again.\n"};
-                print_in_style(tooLow, 10);
+                PrintEffect(tooLow, 10);
             } else {
                 const char *tooHigh = {"Too high! Try again.\n"};
-                print_in_style(tooHigh, 10);
+                PrintEffect(tooHigh, 10);
             }
         }
 
@@ -91,10 +89,10 @@ void GuessingGamePlay(int uc, int cc) {
         char gameOver[100];
         SetColorAndBackground(12, 0);
         snprintf(gameOver, sizeof(gameOver),"Sorry, you've used all your attempts! The correct number was %d.\n", cc);
-        print_in_style(gameOver, 10);
+            PrintEffect(gameOver, 10);
         char gameOverScore[100];
         snprintf(gameOverScore, sizeof(gameOverScore),"Your score: 0/10 = 0%%\n");
-        print_in_style(gameOverScore, 10);
+            PrintEffect(gameOverScore, 10);
         ResetColor();
     }
 
@@ -116,7 +114,7 @@ int randomNum(){
 int userInput(){
     int numInput;
     const char *userInput = {"What is your guess?: "};
-    print_in_style(userInput, 20);
+    PrintEffect(userInput, 20);
     scanf("%d", &numInput);
     return numInput;
 }
@@ -124,36 +122,38 @@ int userInput(){
 void PlayAgain(){
     char playAgain;
     const char *playAgainPrompt = {"Would you like to play again? (Y/N): "};
-    print_in_style(playAgainPrompt, 20);
+    PrintEffect(playAgainPrompt, 20);
     scanf(" %c", &playAgain);
     if(playAgain == 'Y' || playAgain == 'y'){
         main();
     } else {
         const char *goodbye = {"Goodbye!"};
-        print_in_style(goodbye, 20);
+        PrintEffect(goodbye, 20);
         exit(0);
     }
 }
 
 void guessingGameHeader(){
+    
+    SetColorAndBackground(14, 0);
+    system("cls");
+    putchar('\n');
     printf(" $$$$$$\\                                          $$\\                            $$$$$$\\                                    \n");
     printf("$$  __$$\\                                         \\__|                          $$  __$$\\                                   \n");
-    Sleep(500);
     printf("$$ /  \\__|$$\\   $$\\  $$$$$$\\   $$$$$$$\\  $$$$$$$\\ $$\\ $$$$$$$\\   $$$$$$\\        $$ /  \\__| $$$$$$\\  $$$$$$\\$$$$\\   $$$$$$\\  \n");
     printf("$$ |$$$$\\ $$ |  $$ |$$  __$$\\ $$  _____|$$  _____|$$ |$$  __$$\\ $$  __$$\\       $$ |$$$$\\  \\____$$\\ $$  _$$  _$$\\ $$  __$$\\ \n");
-    Sleep(500);
     printf("$$ |\\_$$ |$$ |  $$ |$$$$$$$$ |\\$$$$$$\\  \\$$$$$$\\  $$ |$$ |  $$ |$$ /  $$ |      $$ |\\_$$ | $$$$$$$ |$$ / $$ / $$ |$$$$$$$$ |\n");
     printf("$$ |  $$ |$$ |  $$ |$$   ____| \\____$$\\  \\____$$\\ $$ |$$ |  $$ |$$ |  $$ |      $$ |  $$ |$$  __$$ |$$ | $$ | $$ |$$   ____|\n");
-    Sleep(500);
     printf("\\$$$$$$  |\\$$$$$$  |\\$$$$$$$\\ $$$$$$$  |$$$$$$$  |$$ |$$ |  $$ |\\$$$$$$$ |      \\$$$$$$  |\\$$$$$$$ |$$ | $$ | $$ |\\$$$$$$$\\ \n");
     printf(" \\______/  \\______/  \\_______|\\_______/ \\_______/ \\__|\\__|  \\__| \\____$$ |       \\______/  \\_______|\\__| \\__| \\__| \\_______|\n");
-    Sleep(500);
     printf("                                                                $$\\   $$ |                                                  \n");
     printf("                                                                \\$$$$$$  |                                                  \n");
     printf("                                                                 \\______/                                                   \n");
 }
 
 void welcomeMessage(){
+    SetColorAndBackground(11, 0);
+
     const char *welcome[] = {
         "The system has chosen a random number between 1 and 100.",
         "You have 10 attempts to guess the correct number.",
@@ -166,13 +166,13 @@ void welcomeMessage(){
     };
 
     for(int i = 0; i < 8; i++){
-        print_in_style(welcome[i], 20);
+        PrintEffect(welcome[i], 10);
         printf("\n");
     }
-
+        ResetColor();
 }
     
-void print_in_style(const char *str, int delay){
+void PrintEffect(const char *str, int delay){
     for(int i = 0; str[i] != '\0'; i++){
         printf("%c", str[i]);
         Sleep(delay);

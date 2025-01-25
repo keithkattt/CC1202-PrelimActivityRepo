@@ -17,12 +17,12 @@ void displayRaceTrack(int positions[NUM_CARS], char carSymbols[NUM_CARS][10]);
 void displayRanking(int positions[NUM_CARS], char cars[NUM_CARS]);
 void gotoxy();
 void SetColorAndBackground();
-void SetConsoleSize();
-
+void PrintEffect(const char *str, int delay);
+void resetColor(); 
 
 int main() {
-	SetConsoleSize(110, 50);
     menu(); // Start the program menu
+    resetColor();  // Reset text color to default   
     return 0;
 }
 
@@ -32,16 +32,16 @@ void SetColorAndBackground(int ForgC, int BackC) {
     return;
 }
 
-void SetConsoleSize(int width, int height) {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+void PrintEffect(const char *str, int delay) {
+    for(int i = 0; str[i] != '\0'; i++) {
+        printf("%c", str[i]);
+        Sleep(delay);
+    }
+}
 
-    // 1. Set the screen buffer size (must be >= window size)
-    COORD bufferSize = { (SHORT)width, (SHORT)height };
-    SetConsoleScreenBufferSize(hConsole, bufferSize);
-
-    // 2. Define the window's position/size
-    SMALL_RECT windowSize = { 0, 0, (SHORT)(width - 1), (SHORT)(height - 1) };
-    SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
+void resetColor() {
+    SetColorAndBackground(15, 0);
+    return;
 }
 
 void gotoxy(int x, int y) //function definition
@@ -61,13 +61,33 @@ void menu() {
     	system("cls");
         gotoxy(60, 0);
         SetColorAndBackground(11, 0);  // Set text color to bright cyan
-        printf("=== Racing Game ===\n");
-       	gotoxy(60, 1);
-	    printf("1. Start Race\n");
+        printf(" /$$$$$$$                      /$$                            /$$$$$$                                   \n");
+        gotoxy(60, 1);
+        printf("| $$__  $$                    |__/                           /$$__  $$                                  \n");
         gotoxy(60, 2);
-		printf("2. Exit\n");
+        printf("| $$  \\ $$  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$  \\__/  /$$$$$$  /$$$$$$/$$$$   /$$$$$$ \n");
         gotoxy(60, 3);
-		printf("Enter your choice: ");
+        printf("| $$$$$$$/ |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$ /$$$$ |____  $$| $$_  $$_  $$ /$$__  $$\n");
+        gotoxy(60, 4);
+        printf("| $$__  $$  /$$$$$$$| $$      | $$| $$  \\ $$| $$  \\ $$      | $$|_  $$  /$$$$$$$| $$ \\ $$ \\ $$| $$$$$$$$\n");
+        gotoxy(60, 5);
+        printf("| $$  \\ $$ /$$__  $$| $$      | $$| $$  | $$| $$  | $$      | $$  \\ $$ /$$__  $$| $$ | $$ | $$| $$_____/\n");
+        gotoxy(60, 6);
+        printf("| $$  | $$|  $$$$$$$|  $$$$$$$| $$| $$  | $$|  $$$$$$$      |  $$$$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$\n");
+        gotoxy(60, 7);
+        printf("|__/  |__/ \\_______/ \\_______/|__/|__/  |__/ \\____  $$       \\______/  \\_______/|__/ |__/ |__/ \\_______/\n");
+        gotoxy(60, 8);
+        printf("                                             /$$  \\ $$                                                  \n");
+        gotoxy(60, 9);
+        printf("                                            |  $$$$$$/                                                  \n");
+        gotoxy(60, 10);
+        printf("                                             \\______/                                                   \n");
+       	gotoxy(60, 11);
+	    PrintEffect("1. Start Race", 10);
+        gotoxy(60, 12);
+		PrintEffect("2. Exit", 10);
+        gotoxy(60, 13);
+		PrintEffect("Enter your choice: ", 10);
         scanf("%d", &choice);
 
         switch(choice) {
@@ -75,7 +95,8 @@ void menu() {
                 race();
                 break;
             case 2:
-                printf("Exiting the game...\n");
+                gotoxy(60, 15);
+                PrintEffect("Exiting the game...\n", 5);
                 return;
             default:
                 printf("Invalid choice. Please try again.\n");
@@ -85,13 +106,13 @@ void menu() {
 
 // Function to print the instructions
 void printInstructions() {
-    printf("\nWelcome to the Racing Game!\n");
-    printf("Instructions:\n");
-    printf("1. The race will feature 5 cars: A, B, C, D, and E.\n");
-    printf("2. Each car's movement is determined by random numbers generated during the race.\n");
-    printf("3. The first car to reach the finish line wins!\n");
-    printf("4. The rankings will be displayed after the race.\n");       
-    printf("Let's begin the race!\n");
+    PrintEffect("\nWelcome to the Racing Game!\n", 10);
+    PrintEffect("Instructions:\n", 10);
+    PrintEffect("1. The race will feature 5 cars: A, B, C, D, and E.\n", 10);
+    PrintEffect("2. Each car's movement is determined by random numbers generated during the race.\n", 10);
+    PrintEffect("3. The first car to reach the finish line wins!\n", 10);
+    PrintEffect("4. The rankings will be displayed after the race.\n", 10);       
+    PrintEffect("Let's begin the race!\n", 10);
 }
 
 // Function to simulate a race
@@ -110,10 +131,10 @@ void race() {
     int finished = 0;  
 
     printInstructions();
-    printf("\nPress any key to start...");
+    PrintEffect("\nPress any key to start...", 10);
     _getch();  // Wait for user input to start
 
-    printf("\n\nRace starting...\n"); // Display
+    PrintEffect("\n\nRace starting...\n", 10); // Display
     sleep(1);  // Sleep for 1 second    
 
     srand(time(0)); // Seed the random number generator
@@ -148,7 +169,7 @@ void race() {
         }
        
         // Delay to simulate race timing
-        usleep(300000);  // Sleep for 1 second
+        usleep(150000);  // Sleep for 1 second
     }
 
     // Display the ranking after the race
@@ -210,14 +231,16 @@ void displayRanking(int positions[NUM_CARS], char cars[NUM_CARS]) {
         printf("Position %d: Car %c - Distance: %d\n", i + 1, cars[rank[i]], positions[rank[i]]);
     }
 
+
+    SetColorAndBackground(10, 0);  // Set text color to bright green
     // Show the 1st to last place
     printf("\n1st Place: Car %c\n", cars[rank[0]]);
     printf("2nd Place: Car %c\n", cars[rank[1]]);
     printf("3rd Place: Car %c\n", cars[rank[2]]);
     printf("4th Place: Car %c\n", cars[rank[3]]);
-    printf("5th Place: Car %c\n", cars[rank[4]]);
+    printf("5th Place: Car %c\n\n", cars[rank[4]]);
 	
-	printf("\nPress any key to continue... ");
+	printf("Press any key to continue... ");
 	_getch();
 
 }
