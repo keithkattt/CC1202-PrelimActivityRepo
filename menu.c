@@ -11,6 +11,15 @@ void setColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
+void gotoxy(int x, int y) //function definition
+     {
+            COORD xyPos = {0, 0};   //initialization cursor position
+            xyPos.X = x;   xyPos.Y =  y;  //assign coordinates
+
+            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),xyPos);
+            return;
+    }
+
 // Function to display the menu with cursor navigation
 void displayMenu(int option) {
     system("cls"); // Clear the screen

@@ -1,28 +1,73 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <windows.h>
 #include <unistd.h>  // For sleep function on Unix-based systems
 #include <conio.h>
 
 #define NUM_CARS 5
-#define FINISH_LINE 50  // Finish line position
-#define TRACK_LENGTH 60  // Total track length
+#define FINISH_LINE 100  // Finish line position
+#define TRACK_LENGTH 110  // Total track length
 
 // Function declarations
 void printInstructions();
 void race();
+void menu();
 void displayRaceTrack(int positions[NUM_CARS], char carSymbols[NUM_CARS][10]);
 void displayRanking(int positions[NUM_CARS], char cars[NUM_CARS]);
+void gotoxy();
+void SetColorAndBackground();
+void SetConsoleSize();
+
+
+int main() {
+	SetConsoleSize(110, 50);
+    menu(); // Start the program menu
+    return 0;
+}
+
+void SetColorAndBackground(int ForgC, int BackC) {
+    WORD wColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), wColor);
+    return;
+}
+
+void SetConsoleSize(int width, int height) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    // 1. Set the screen buffer size (must be >= window size)
+    COORD bufferSize = { (SHORT)width, (SHORT)height };
+    SetConsoleScreenBufferSize(hConsole, bufferSize);
+
+    // 2. Define the window's position/size
+    SMALL_RECT windowSize = { 0, 0, (SHORT)(width - 1), (SHORT)(height - 1) };
+    SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
+}
+
+void gotoxy(int x, int y) //function definition
+     {
+            COORD xyPos = {0, 0};   //initialization cursor position
+            xyPos.X = x;   xyPos.Y =  y;  //assign coordinates
+
+            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),xyPos);
+            return;
+    }
 
 // Main menu to manage operations
 void menu() {
     int choice;
     
     while(1) {
-        printf("\n=== Racing Game ===\n");
-        printf("1. Start Race\n");
-        printf("2. Exit\n");
-        printf("Enter your choice: ");
+    	system("cls");
+        gotoxy(60, 0);
+        SetColorAndBackground(11, 0);  // Set text color to bright cyan
+        printf("=== Racing Game ===\n");
+       	gotoxy(60, 1);
+	    printf("1. Start Race\n");
+        gotoxy(60, 2);
+		printf("2. Exit\n");
+        gotoxy(60, 3);
+		printf("Enter your choice: ");
         scanf("%d", &choice);
 
         switch(choice) {
@@ -56,13 +101,13 @@ void race() {
     
     // Multi-character symbols for each car in the desired format
     char carSymbols[NUM_CARS][10] = {
-        "=car1>}",   // Car A
-        "=car2>}",   // Car B
-        "=car3>}",   // Car C
-        "=car4>}",   // Car D
-        "=car5>}"    // Car E
+        "=carA>}",   // Car A
+        "=carB>}",   // Car B
+        "=carC>}",   // Car C
+        "=carD>}",   // Car D
+        "=carE>}"    // Car E
     };
-    int finished = 0;
+    int finished = 0;  
 
     printInstructions();
     printf("\nPress any key to start...");
@@ -88,22 +133,26 @@ void race() {
         }
 
         // Display the race track with current car positions
+        SetColorAndBackground(3, 0);  // Set text color to cyan
         displayRaceTrack(positions, carSymbols);
-        
+
         // Check if any car has finished the race
-        finished = 1;
-        for(int i = 0; i < NUM_CARS; i++) {
-            if(positions[i] < FINISH_LINE) {
+          for(int i = 0; i < NUM_CARS; i++) {
+            if(positions[i] != FINISH_LINE) {
                 finished = 0;
+                
+            }else {
+                finished = 1;
                 break;
             }
         }
-
+       
         // Delay to simulate race timing
-        sleep(1);  // Sleep for 1 second
+        usleep(300000);  // Sleep for 1 second
     }
 
     // Display the ranking after the race
+    SetColorAndBackground(14, 0);  // Set text color to bright yellow
     displayRanking(positions, cars);
 }
 
@@ -167,9 +216,9 @@ void displayRanking(int positions[NUM_CARS], char cars[NUM_CARS]) {
     printf("3rd Place: Car %c\n", cars[rank[2]]);
     printf("4th Place: Car %c\n", cars[rank[3]]);
     printf("5th Place: Car %c\n", cars[rank[4]]);
+	
+	printf("\nPress any key to continue... ");
+	_getch();
+
 }
 
-int main() {
-    menu(); // Start the program menu
-    return 0;
-}
