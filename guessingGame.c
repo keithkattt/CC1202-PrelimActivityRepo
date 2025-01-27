@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <process.h>
 #include <unistd.h>
+#include <ctype.h>
 
 int randomNum();//Generates random num from 1 - 100, parameter for how many times you use it 
 int userInput(); //Prompts the user and returns the value
@@ -38,36 +39,46 @@ void GuessingGamePlay(int uc, int cc) {
     int s = 0; // Score variable
     
     // Game loop: Allow up to 10 attempts
-    do {
-        // Prompt the user to enter a guess
-        char prompt[100];
-        snprintf(prompt, sizeof(prompt),"Attempt %d: Enter your guess: ", a);
-        PrintEffect(prompt, 10);
-        scanf("%d", &uc); // Read the user's input
+   do {
+    // Prompt the user to enter a guess
+    char prompt[100];
+    snprintf(prompt, sizeof(prompt), "Attempt %d: Enter your guess: ", a);
+    PrintEffect(prompt, 10);
 
-        // Check if the guess is correct
-        if (uc == cc) {
-            const char *correct = {"Correct! You've guessed the number!\n"};
-            PrintEffect(correct, 10);
+    // Validate input
+    if (scanf("%d", &uc) != 1) { // If input is not an integer
+        SetColorAndBackground(4, 0);
+        const char *invalidInput = {"Invalid input! Please enter a number between 1 and 100.\n"};
+        PrintEffect(invalidInput, 10);
+        ResetColor();
 
-            // Calculate the score based on the number of attempts used
-            s = (11 - a) * 10; // Score calculation: higher for fewer attempts
-            char calcScore[100];
-            snprintf(calcScore, sizeof(calcScore),"Your score: %d/10 = %d%%\n", (11 - a), s);
-            PrintEffect(calcScore, 10);
-            break; // Exit the loop since the guess is correct
+        // Clear the input buffer to handle any extra characters
+        while (getchar() != '\n'); 
+        continue; // Continue the loop without incrementing the attempt counter
+    }
+
+    // Check if the guess is correct
+    if (uc == cc) {
+        const char *correct = {"Correct! You've guessed the number!\n"};
+        PrintEffect(correct, 10);
+
+        // Calculate the score based on the number of attempts used
+        s = (11 - a) * 10; // Score calculation: higher for fewer attempts
+        char calcScore[100];
+        snprintf(calcScore, sizeof(calcScore), "Your score: %d/10 = %d%%\n", (11 - a), s);
+        PrintEffect(calcScore, 10);
+        break; // Exit the loop since the guess is correct
+    } else {
+        // Check if the guess is outside the valid range (1-100)
+        if (uc < 1 || uc > 100) {
+            SetColorAndBackground(4, 0);
+            const char *invalid = {"Invalid number! Please enter a number between 1 and 100.\n"};
+            PrintEffect(invalid, 10);
+            ResetColor();
+            continue; // Skip the rest of the loop for invalid input
         } else {
-            // Check if the guess is outside the valid range (1-100)
-            if (uc < 1 || uc > 100) {
-                SetColorAndBackground(4, 0);
-                const char *invalid = {"Invalid number! Please enter a number between 1 and 100.\n"};
-                PrintEffect(invalid, 10);
-                ResetColor();
-                continue; // Skip the rest of the loop for invalid input
-            }
-
-            // Provide feedback for incorrect guesses
-            if (abs(uc - cc) <= 5) { // Check if the guess is within 5 of the correct number
+            // Check if the guess is within 5 of the correct number
+            if (abs(uc - cc) <= 5) {
                 const char *almstThere = {"Almost there! "};
                 PrintEffect(almstThere, 10);
             }
@@ -79,10 +90,11 @@ void GuessingGamePlay(int uc, int cc) {
                 PrintEffect(tooHigh, 10);
             }
         }
+    }
+    a++; // Increment the attempt counter
 
-        a++; // Increment the attempt counter
+} while (a <= 10); // Allow up to 10 attempts
 
-    } while (a <= 10); // Allow up to 10 attempts
 
     // If the user fails to guess within 10 attempts, end the game
     if (a > 10 && uc != cc) {

@@ -95,7 +95,7 @@ void menu() {
                 race();
                 break;
             case 2:
-                gotoxy(50, 17);
+                gotoxy(60, 17);
                 PrintEffect("Exiting the game...\n", 5);
                 return;
             default:
@@ -122,11 +122,11 @@ void race() {
     
     // Multi-character symbols for each car in the desired format
     char carSymbols[NUM_CARS][10] = {
-        "=carA>}",   // Car A
-        "=carB>}",   // Car B
-        "=carC>}",   // Car C
-        "=carD>}",   // Car D
-        "=carE>}"    // Car E
+        "[8CarA8}",   // Car A
+        "[8CarB8}",   // Car B
+        "[8CarC8}",   // Car C
+        "[8CarD8}",   // Car D
+        "[8CarE8}"    // Car E
     };
     int finished = 0;  
 
@@ -229,19 +229,25 @@ void displayRanking(int positions[NUM_CARS], char cars[NUM_CARS]) {
     printf("\nRace Finished! Here are the rankings:\n");
     for(int i = 0; i < NUM_CARS; i++) {
         printf("Position %d: Car %c - Distance: %d\n", i + 1, cars[rank[i]], positions[rank[i]]);
+        usleep(500000);  // Sleep for 0.5 seconds
     }
 
 
     SetColorAndBackground(10, 0);  // Set text color to bright green
     // Show the 1st to last place
     printf("\n1st Place: Car %c\n", cars[rank[0]]);
+    usleep(500000);  // Sleep for 0.5 seconds
     printf("2nd Place: Car %c\n", cars[rank[1]]);
+    usleep(500000);  // Sleep for 0.5 seconds
     printf("3rd Place: Car %c\n", cars[rank[2]]);
+    usleep(500000);  // Sleep for 0.5 seconds
     printf("4th Place: Car %c\n", cars[rank[3]]);
+    usleep(500000);  // Sleep for 0.5 seconds
     printf("5th Place: Car %c\n\n", cars[rank[4]]);
 	
 	printf("Press any key to continue... ");
 	_getch();
+    usleep(500000);  // Sleep for 0.5 seconds
 
 }
 
