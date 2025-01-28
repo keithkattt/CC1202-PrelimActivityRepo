@@ -15,26 +15,65 @@ void welcomeMessage(); //Prints welcome message
 void PrintEffect(const char *str, int delay); //Prints in style
 void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 256
 void ResetColor(); //Resets the color and background
-void GuessingGamePlay(); //Main function
+void GuessingGameRound(); //Main function
 void PlayAgain(); //Asks the user if they want to play again
-void MainGuessingGame(); //Main function
+void guessingGame(); //Main function
+void gotoxy(int x, int y); //Moves the cursor to the x and y coordinates
 
 int main(){
-    
+    int choice;
+
+    while (1)
+    {
+    guessingGameHeader();
+
+    gotoxy(60, 13);
+    printf("1. Start Game\n");
+    gotoxy(60, 14);
+    printf("2. Exit\n");
+    gotoxy(60, 15);
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                guessingGame();
+                break;
+            case 2:
+                gotoxy(60, 16);
+                PrintEffect("Exiting the game...\n", 5);
+                usleep(1000);  // Sleep for 1 second
+
+                system("cls");
+                exit(0);
+                
+            default:
+                PrintEffect("Invalid choice. Please try again.\n", 5);
+        }
+    }
+    return 0;
+}
+
+void gotoxy(int x, int y){
+    COORD xyPos = {0, 0};
+    xyPos.X = x;
+    xyPos.Y = y;
+
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), xyPos);
+    return;
+}
+
+void guessingGame(){
     guessingGameHeader();
     welcomeMessage();
 
     int computerNum = randomNum();
     int userGuess;
     
-    GuessingGamePlay(userGuess, computerNum);
-    
-   
-
-    return 0;
+    GuessingGameRound(userGuess, computerNum);
 }
 
-void GuessingGamePlay(int uc, int cc) {
+void GuessingGameRound(int uc, int cc) {
     int a = 1; // Attempt counter
     int s = 0; // Score variable
     
@@ -100,14 +139,19 @@ void GuessingGamePlay(int uc, int cc) {
     if (a > 10 && uc != cc) {
         char gameOver[100];
         SetColorAndBackground(12, 0);
-        snprintf(gameOver, sizeof(gameOver),"Sorry, you've used all your attempts! The correct number was %d.\n", cc);
+        snprintf(gameOver, sizeof(gameOver),"\t\tSorry, you've used all your attempts! The correct number was %d.\n", cc);
             PrintEffect(gameOver, 10);
         char gameOverScore[100];
-        snprintf(gameOverScore, sizeof(gameOverScore),"Your score: 0/10 = 0%%\n");
+        snprintf(gameOverScore, sizeof(gameOverScore),"\t\tYour score: 0/10 = 0%%\n");
             PrintEffect(gameOverScore, 10);
         ResetColor();
     }
 
+    SetColorAndBackground(11, 0);
+    PrintEffect("\nPress any key to return...", 10);
+    getch(); // Wait for a key press
+
+    ResetColor();
     return; // Exit the program
 }
 
