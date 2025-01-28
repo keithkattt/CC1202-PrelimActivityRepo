@@ -2,12 +2,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
-#include <unistd.h>  // For sleep function on Unix-based systems
+#include <unistd.h>  // For sleep function 
 #include <conio.h>
 
 #define NUM_CARS 5
 #define FINISH_LINE 100  // Finish line position
 #define TRACK_LENGTH 110  // Total track length
+#define ENTER_KEY 13
+#define UP_ARROW 72
+#define DOWN_ARROW 80
+
 
 // Function declarations
 void printInstructions();

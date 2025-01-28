@@ -8,6 +8,11 @@
 #include <unistd.h>
 #include <ctype.h>
 
+#define ENTER_KEY 13
+#define UP_ARROW 72
+#define DOWN_ARROW 80
+
+
 int randomNum();//Generates random num from 1 - 100, parameter for how many times you use it 
 int userInput(); //Prompts the user and returns the value
 void guessingGameHeader(); //Prints ASCII art
@@ -16,42 +21,56 @@ void PrintEffect(const char *str, int delay); //Prints in style
 void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 256
 void ResetColor(); //Resets the color and background
 void GuessingGameRound(); //Main function
-void PlayAgain(); //Asks the user if they want to play again
 void guessingGame(); //Main function
+void guessingGameMenu(); //Display keybinded Menu 
 void gotoxy(int x, int y); //Moves the cursor to the x and y coordinates
 
 int main(){
-    int choice;
+    int choice = 1;
+    char key;
 
-    while (1)
-    {
-    guessingGameHeader();
+    while (1){
+        guessingGameHeader();
+        guessingGameMenu(choice);
+        
+        key = _getch();
 
-    gotoxy(60, 13);
-    printf("1. Start Game\n");
-    gotoxy(60, 14);
-    printf("2. Exit\n");
-    gotoxy(60, 15);
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
+        if (key == UP_ARROW) {
+                choice--;
+            if (choice < 1){
+                choice = 2;
+            } 
+        } else if (key == DOWN_ARROW) {
+            choice++;
 
-        switch(choice) {
-            case 1:
-                guessingGame();
-                break;
-            case 2:
-                gotoxy(60, 16);
-                PrintEffect("Exiting the game...\n", 5);
-                usleep(1000);  // Sleep for 1 second
+            if (choice > 2){
+                choice = 1;
+            }
+        } else if (key == ENTER_KEY) {
+            
+            switch(choice) {
+                case 1:
+                    gotoxy(60, 17);
+                    PrintEffect("Starting Game...\n", 10);
+                    usleep(1000000);  // Delay for 1 second
+                    system("cls");
 
-                system("cls");
-                exit(0);
+                    guessingGame();
+                    break;
+                case 2:
                 
-            default:
-                PrintEffect("Invalid choice. Please try again.\n", 5);
+                    gotoxy(60, 17);
+                    PrintEffect("Exiting the game...\n", 10);
+                    usleep(1000000);  // Delay for 1 second
+
+                    system("cls");
+                    exit(0);
+
+                default:
+                    PrintEffect("Invalid choice. Please try again.\n", 5);
+            }
         }
     }
-    return 0;
 }
 
 void gotoxy(int x, int y){
@@ -61,6 +80,30 @@ void gotoxy(int x, int y){
 
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), xyPos);
     return;
+}
+
+void guessingGameMenu(int choice){
+    
+    if (choice == 1){
+        gotoxy(55, 13);
+        SetColorAndBackground(14, 0);
+        printf("-> 1. Start Game");
+        ResetColor();
+    } else {
+        gotoxy(55, 13);
+        printf("   1. Start Game");
+    }
+
+    if (choice == 2){
+        gotoxy(55, 14);
+        SetColorAndBackground(14, 0);
+        printf("-> 2. Exit Guessing Game");
+        ResetColor();
+    } else {
+        gotoxy(55, 14);
+        printf("   2. Exit Guessing Game");
+    }
+
 }
 
 void guessingGame(){
@@ -175,20 +218,6 @@ int userInput(){
     return numInput;
 }
 
-void PlayAgain(){
-    char playAgain;
-    const char *playAgainPrompt = {"Would you like to play again? (Y/N): "};
-    PrintEffect(playAgainPrompt, 20);
-    scanf(" %c", &playAgain);
-    if(playAgain == 'Y' || playAgain == 'y'){
-        main();
-    } else {
-        const char *goodbye = {"Goodbye!"};
-        PrintEffect(goodbye, 20);
-        exit(0);
-    }
-}
-
 void guessingGameHeader(){
     
     SetColorAndBackground(14, 0);
@@ -205,6 +234,7 @@ void guessingGameHeader(){
     printf("\t                                                                $$\\   $$ |                                                  \n");
     printf("\t                                                                \\$$$$$$  |                                                  \n");
     printf("\t                                                                 \\______/                                                   \n\n");
+    ResetColor();
 }
 
 void welcomeMessage(){

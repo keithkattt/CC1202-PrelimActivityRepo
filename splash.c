@@ -45,7 +45,7 @@ int main() {
         printf("%s\n", splash[i]);
     }
 
-    usleep(1); // Wait for 1 second
+    usleep(40000); // Wait for 2 seconds
     for (int i = 0; i < splashSize; i++) {
       
         printf("\033[F\033[K"); // ANSI escape codes to move cursor up and clear line
