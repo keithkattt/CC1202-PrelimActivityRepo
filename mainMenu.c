@@ -119,6 +119,7 @@ void mainMenu() {
                 gotoxy(60, 13);
                 printf("Exiting program"); usleep(300000); printf(".");  usleep(300000); printf("."); usleep(300000); printf(".");   
                 usleep(1000000); 
+                system('cls');
                 break;
             }
 

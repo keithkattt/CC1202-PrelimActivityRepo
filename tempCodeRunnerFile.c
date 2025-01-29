@@ -1,2 +1,1 @@
-
-void gotoxy(int x, int y){
+SetColorAndBackground(14, 0); 
