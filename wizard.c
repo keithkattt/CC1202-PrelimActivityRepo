@@ -9,51 +9,114 @@ void gotoxy(int x, int y);//Moves the cursor to the x and y coordinates
 void PrintEffect(const char *str, int delay); //Prints in style
 void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 15 
 void ResetColor(); //Resets the color and background
-void textBubble(const char *message); //text bubble for Merlin the Wizard
+void wizard(); //Displays Merlin the Wizard
+void textBubble(); //text bubble for Merlin the Wizard
 
 int main() {
-    printf("             o                            ________________________\n");
-    printf("                   O       /`-.__       < Welcome to Number tricks >\n");
-    printf("                          /  \\¯'^|       -----------------------\n");
-    printf("             o           T    l  *         /          \n");
-    printf("                        _|-..-|_          /          \n");
-    printf("                 O    (^ '----' `)\n");
-    printf("                       `\\-....-/^\n");
-    printf("             O       o  ) \"/ \" (\n");
-    printf("                       _( (-)  )_\n");
-    printf("                   O  /\\ )    (  /\\\n");
-    printf("                     /  \\\u00a0(    ) |  \\\n");
-    printf("                 o  o    \\\\)  ( /    \\\n");
-    printf("                   /     |(  )|      \\\n");
-    printf("                  /    o \\\\ \\( /       \\\n");
-    printf("            __.--'   O    \\\\_ /   .._   \\\n");
-    printf("           //|)\\      ,   (_)   /(((\\^)\'\\\n");
-    printf("              |       | O         )  `  |\n");
-    printf("              |      / o___      /      /\n");
-    printf("             /  _.-''^^__O_^^''-._     /\n");
-    printf("           .'  /  -''^^    ^^''-  \\\\--'^\n");
-    printf("         .'   .`.  `'''----'''^  .`. \\\n");
-    printf("       .'    /   `'--..____..--'^   \\\\ \\\n");
-    printf("      /  _.-/                        \\\\ \\\n");
-    printf("  .::'/^   |                        |  `.\n");
-    printf("         .-'|                        |    `-.\n");
-    printf("   _.--'`   \\\\                        /       `-.\n");
-    printf("  /          \\\\                      /           `-._\n");
-    printf("  `'---..__   `.                  .__.._   __       \\\n");
-    printf("           ``'''`.              .'      `'^  `''---'^\n");
-    printf("                  `-..______..-'\n");
+    system("cls");
+    wizard();
+    textBubble();
 
+    
 
     return 0;
 }
 
-void textBubble(const char *message){
+void textBubble(){
     //x = 43   ________________________
     //x = 41 < Welcome to Number tricks >
     //x = 43   -----------------------
     //x = 44    /    
     //x = 43   /
 
+    gotoxy(43, 0);
+    printf("________________________");
+    gotoxy(41, 1);
+    printf("< Welcome to Number tricks >");
+    gotoxy(43, 2);
+    printf("-----------------------");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+
+    getch();
+
+    gotoxy(43, 0);
+    printf("________________________");
+    gotoxy(41, 1);
+    PrintEffect("<  I am Merlin the Wizard  >", 5);
+    gotoxy(43, 2);
+    printf("-----------------------");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+
+    getch();
+}
+
+void wizard(){
+    gotoxy(0, 1);
+    printf("             o");
+    gotoxy(0, 2);
+    printf("                   O       /`-.__");
+    gotoxy(0, 3);
+    printf("                          /  \\¯'^|");
+    gotoxy(0, 4);
+    printf("             o           T    l  *");
+    gotoxy(0, 5);
+    printf("                        _|-..-|_");
+    gotoxy(0, 6);
+    printf("                 O    (^ '----' `)");
+    gotoxy(0, 7);
+    printf("                       `\\-....-/^");
+    gotoxy(0, 8);
+    printf("             O       o  ) \"/ \" (");
+    gotoxy(0, 9);
+    printf("                       _( (-)  )_");
+    gotoxy(0, 10);
+    printf("                   O  /\\ )    (  /\\");
+    gotoxy(0, 11);
+    printf("                     /  \\ (    ) |  \\");
+    gotoxy(0, 12);
+    printf("                 o  o    \\)  ( /    \\");
+    gotoxy(0, 13);
+    printf("                   /     |(  )|      \\");
+    gotoxy(0, 14);
+    printf("                  /    o \\ \\( /       \\");
+    gotoxy(0, 15);
+    printf("            __.--'   O    \\_ /   .._   \\");
+    gotoxy(0, 16);
+    printf("           //|)\\      ,   (_)   /(((\\^)\'\\");
+    gotoxy(0, 17);
+    printf("              |       | O         )  `  |");
+    gotoxy(0, 18);
+    printf("              |      / o___      /      /");
+    gotoxy(0, 19);
+    printf("             /  _.-''^^__O_^^''-._     /\n");
+    gotoxy(0, 20);
+    printf("           .'  /  -''^^    ^^''-  \\--'^\n");
+    gotoxy(0, 21);
+    printf("         .'   .`.  `'''----'''^  .`. \\\n");
+    gotoxy(0, 22);
+    printf("       .'    /   `'--..____..--'^   \\ \\\n");
+    gotoxy(0, 23);
+    printf("      /  _.-/                        \\ \\\n");
+    gotoxy(0, 24);
+    printf("  .::'/^   |                        |  `.\n");
+    gotoxy(0, 25);
+    printf("         .-'|                        |    `-.\n");
+    gotoxy(0, 26);
+    printf("   _.--'`   \\                        /       `-.\n");
+    gotoxy(0, 27);
+    printf("  /          \\                      /           `-._\n");
+    gotoxy(0, 28);
+    printf("  `'---..__   `.                  .__.._   __       \\\n");
+    gotoxy(0, 29);
+    printf("           ``'''`.              .'      `'^  `''---'^\n");
+    gotoxy(0, 30);
+    printf("                  `-..______..-'\n");
 }
 
 void gotoxy(int x, int y){
