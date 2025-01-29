@@ -30,11 +30,11 @@ void textBubble(){
     //x = 43   /
 
     gotoxy(43, 0);
-    printf("________________________");
+    printf("_________________________");
     gotoxy(41, 1);
-    printf("< Welcome to Number tricks >");
+    printf("<  Welcome to Number tricks  >");
     gotoxy(43, 2);
-    printf("-----------------------");
+    printf("-------------------------");
     gotoxy(44, 3);
     printf("/");
     gotoxy(43, 4);
@@ -43,18 +43,133 @@ void textBubble(){
     getch();
 
     gotoxy(43, 0);
-    printf("________________________");
-    gotoxy(41, 1);
-    PrintEffect("<  I am Merlin the Wizard  >", 5);
+    printf("________________________ ");
     gotoxy(43, 2);
-    printf("-----------------------");
+    printf("------------------------ ");
+    gotoxy(41, 1);
+    printf("<  I am Merlin the Wizard  >  ");
     gotoxy(44, 3);
     printf("/");
     gotoxy(43, 4);
     printf("/");
 
     getch();
+
+    gotoxy(43, 0);
+    printf("_______________________________________");
+    gotoxy(43, 2);
+    printf("---------------------------------------");
+    gotoxy(41, 1);
+    printf("<  Today I'll show you something "); SetColorAndBackground(11, 0); printf("MAGICAL "); ResetColor(); printf(">");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+
+    getch();
+
+    gotoxy(43, 0);
+    printf("___________________________            ");
+    gotoxy(43, 2);
+    printf("---------------------------             ");
+    gotoxy(41, 1);
+    printf("<  First think of any number  >            ");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+
+    getch();
+
+    gotoxy(43, 0);
+    printf("___________________                     ");
+    gotoxy(43, 2);
+    printf("-------------------                      ");
+    gotoxy(41, 1);
+    printf("<  Double the number  >                ");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+
+    getch();
+
+    gotoxy(43, 0);
+    printf("_______________________         ");
+    gotoxy(43, 2);
+    printf("-----------------------          ");
+    gotoxy(41, 1);
+    printf("<  Then Subtract it by 6  >        ");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+
+    getch();
+
+    gotoxy(43, 0);
+    printf("_________________________               ");
+    gotoxy(43, 2);
+    printf("-------------------------                    ");
+    gotoxy(41, 1);
+    printf("<  Double the number again  >                 ");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+
+    getch();
+
+    gotoxy(43, 0);
+    printf("________________                                ");
+    gotoxy(43, 2);
+    printf("----------------                                 ");
+    gotoxy(41, 1);
+    printf("<  Divide it by 4  >                       ");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+
+    getch();
+
+    gotoxy(43, 0);
+    printf("__________________________________________");
+    gotoxy(43, 2);
+    printf("------------------------------------------");
+    gotoxy(41, 1);
+    printf("<  Then Subtract it by your original number  >");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+
+    getch();
+
+    gotoxy(43, 0);
+    printf("________________________________          ");
+    gotoxy(43, 2);
+    printf("--------------------------------          ");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+    gotoxy(41, 1);
+    printf("<  The outcome would always be     >          "); 
+    usleep(1000000); 
+    gotoxy(41, 1);
+    printf("<  The outcome would always be.    >"); 
+    usleep(1000000); 
+    gotoxy(41, 1);
+    printf("<  The outcome would always be..   >"); 
+    usleep(1000000); 
+    gotoxy(41, 1);
+    printf("<  The outcome would always be...  >");
+
+    getch();
 }
+
+
 
 void wizard(){
     gotoxy(0, 1);
@@ -104,7 +219,7 @@ void wizard(){
     gotoxy(0, 23);
     printf("      /  _.-/                        \\ \\\n");
     gotoxy(0, 24);
-    printf("  .::'/^   |                        |  `.\n");
+    printf("  .::'/^    |                        | `.\n");
     gotoxy(0, 25);
     printf("         .-'|                        |    `-.\n");
     gotoxy(0, 26);
