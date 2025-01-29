@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <conio.h>
 #include <windows.h>
 
@@ -35,17 +36,17 @@ void displayMenu(int option) {
     
     //ASCII art Main Menu
     SetColorAndBackground(15, 0);
-    gotoxy(50, 1);
+    gotoxy(45, 1);
     printf(" __  __       _         __  __                  ");
-    gotoxy(50, 2);
+    gotoxy(45, 2);
     printf("|  \\/  |     (_)       |  \\/  |                 ");   
-    gotoxy(50, 3);
+    gotoxy(45, 3);
     printf("| \\  / | __ _ _ _ __   | \\  / | ___ _ __  _   _ ");
-    gotoxy(50, 4);
+    gotoxy(45, 4);
     printf("| |\\/| |/ _` | | '_ \\  | |\\/| |/ _ \\ '_ \\| | | |");
-    gotoxy(50, 5);
+    gotoxy(45, 5);
     printf("| |  | | (_| | | | | | | |  | |  __/ | | | |_| |");
-    gotoxy(50, 6);
+    gotoxy(45, 6);
     printf("|_|  |_|\\__,_|_|_| |_| |_|  |_|\\___|_| |_|\\__,_|");
 
 
@@ -116,12 +117,13 @@ void mainMenu() {
         } else if (key == ENTER_KEY) {
             if (option == 4) {
                 gotoxy(60, 13);
-                printf("Exiting program...");
+                printf("Exiting program"); usleep(300000); printf(".");  usleep(300000); printf("."); usleep(300000); printf(".");   
+                usleep(1000000); 
                 break;
             }
 
             gotoxy(60, 13);
-            printf("Starting: %s\n", game[option - 1]);
+            printf("Starting: %s", game[option - 1]); usleep(300000); printf(".");  usleep(300000); printf("."); usleep(300000); printf(".");   
             _getch(); // Wait for a key press to return to the menu
         }
     }

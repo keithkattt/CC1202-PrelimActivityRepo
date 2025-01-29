@@ -63,28 +63,28 @@ void menu() {
     
     while(1) {
     	system("cls");
-        gotoxy(20, 0);
+        gotoxy(10, 0);
         SetColorAndBackground(11, 0);  // Set text color to bright cyan
         printf(" /$$$$$$$                      /$$                            /$$$$$$                                   \n");
-        gotoxy(20, 1);
+        gotoxy(10, 1);
         printf("| $$__  $$                    |__/                           /$$__  $$                                  \n");
-        gotoxy(20, 2);
+        gotoxy(10, 2);
         printf("| $$  \\ $$  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$  \\__/  /$$$$$$  /$$$$$$/$$$$   /$$$$$$ \n");
-        gotoxy(20, 3);
+        gotoxy(10, 3);
         printf("| $$$$$$$/ |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$ /$$$$ |____  $$| $$_  $$_  $$ /$$__  $$\n");
-        gotoxy(20, 4);
+        gotoxy(10, 4);
         printf("| $$__  $$  /$$$$$$$| $$      | $$| $$  \\ $$| $$  \\ $$      | $$|_  $$  /$$$$$$$| $$ \\ $$ \\ $$| $$$$$$$$\n");
-        gotoxy(20, 5);
+        gotoxy(10, 5);
         printf("| $$  \\ $$ /$$__  $$| $$      | $$| $$  | $$| $$  | $$      | $$  \\ $$ /$$__  $$| $$ | $$ | $$| $$_____/\n");
-        gotoxy(20, 6);
+        gotoxy(10, 6);
         printf("| $$  | $$|  $$$$$$$|  $$$$$$$| $$| $$  | $$|  $$$$$$$      |  $$$$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$\n");
-        gotoxy(20, 7);
+        gotoxy(10, 7);
         printf("|__/  |__/ \\_______/ \\_______/|__/|__/  |__/ \\____  $$       \\______/  \\_______/|__/ |__/ |__/ \\_______/\n");
-        gotoxy(20, 8);
+        gotoxy(10, 8);
         printf("                                             /$$  \\ $$                                                  \n");
-        gotoxy(20, 9);
+        gotoxy(10, 9);
         printf("                                            |  $$$$$$/                                                  \n");
-        gotoxy(20, 10);
+        gotoxy(10, 10);
         printf("                                             \\______/                                                   \n");
        	gotoxy(60, 13);
 	    PrintEffect("1. Start Race", 10);
@@ -126,11 +126,11 @@ void race() {
     
     // Multi-character symbols for each car in the desired format
     char carSymbols[NUM_CARS][10] = {
-        "[8CarA8}",   // Car A
-        "[8CarB8}",   // Car B
-        "[8CarC8}",   // Car C
-        "[8CarD8}",   // Car D
-        "[8CarE8}"    // Car E
+        "[=CarA>}",   // Car A
+        "[=CarB>}",   // Car B
+        "[=CarC>}",   // Car C
+        "[=CarD>}",   // Car D
+        "[=CarE>}"    // Car E
     };
     int finished = 0;  
 
@@ -158,7 +158,6 @@ void race() {
         }
 
         // Display the race track with current car positions
-        SetColorAndBackground(3, 0);  // Set text color to cyan
         displayRaceTrack(positions, carSymbols);
 
         // Check if any car has finished the race
@@ -183,6 +182,34 @@ void race() {
 
 // Function to display the race track with car positions
 void displayRaceTrack(int positions[NUM_CARS], char carSymbols[NUM_CARS][10]) {
+    
+        SetColorAndBackground(11, 0);  // Set text color to bright cyan
+        gotoxy(10, 0);
+        printf(" /$$$$$$$                      /$$                            /$$$$$$                                   \n");
+        gotoxy(10, 1);
+        printf("| $$__  $$                    |__/                           /$$__  $$                                  \n");
+        gotoxy(10, 2);
+        printf("| $$  \\ $$  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$  \\__/  /$$$$$$  /$$$$$$/$$$$   /$$$$$$ \n");
+        gotoxy(10, 3);
+        printf("| $$$$$$$/ |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$ /$$$$ |____  $$| $$_  $$_  $$ /$$__  $$\n");
+        gotoxy(10, 4);
+        printf("| $$__  $$  /$$$$$$$| $$      | $$| $$  \\ $$| $$  \\ $$      | $$|_  $$  /$$$$$$$| $$ \\ $$ \\ $$| $$$$$$$$\n");
+        gotoxy(10, 5);
+        printf("| $$  \\ $$ /$$__  $$| $$      | $$| $$  | $$| $$  | $$      | $$  \\ $$ /$$__  $$| $$ | $$ | $$| $$_____/\n");
+        gotoxy(10, 6);
+        printf("| $$  | $$|  $$$$$$$|  $$$$$$$| $$| $$  | $$|  $$$$$$$      |  $$$$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$\n");
+        gotoxy(10, 7);
+        printf("|__/  |__/ \\_______/ \\_______/|__/|__/  |__/ \\____  $$       \\______/  \\_______/|__/ |__/ |__/ \\_______/\n");
+        gotoxy(10, 8);
+        printf("                                             /$$  \\ $$                                                  \n");
+        gotoxy(10, 9);
+        printf("                                            |  $$$$$$/                                                  \n");
+        gotoxy(10, 10);
+        printf("                                             \\______/                                                   \n");
+        resetColor();
+    
+    
+    SetColorAndBackground(3, 0);  // Set text color to cyan
     // Display the starting line
     printf("Start Line: |                                                         \n");
 
