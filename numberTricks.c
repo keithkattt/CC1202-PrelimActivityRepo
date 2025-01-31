@@ -10,7 +10,7 @@ void PrintEffect(const char *str, int delay); //Prints in style
 void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 15 
 void ResetColor(); //Resets the color and background
 void wizard(); //Displays Merlin the Wizard
-void textBubble(); //text bubble for Merlin the Wizard
+void textBubble(); //text bubbles for Merlin the Wizard
 
 int main() {
     system("cls");
@@ -147,26 +147,68 @@ void textBubble(){
     getch();
 
     gotoxy(43, 0);
-    printf("________________________________          ");
+    printf("_________________________                  ");
     gotoxy(43, 2);
-    printf("--------------------------------          ");
+    printf("-------------------------                  ");
     gotoxy(44, 3);
     printf("/");
     gotoxy(43, 4);
     printf("/");
     gotoxy(41, 1);
-    printf("<  The outcome would always be     >          "); 
+    printf("<  The outcome would be     >                 "); 
     usleep(1000000); 
     gotoxy(41, 1);
-    printf("<  The outcome would always be.    >"); 
+    printf("<  The outcome would be.    >"); 
     usleep(1000000); 
     gotoxy(41, 1);
-    printf("<  The outcome would always be..   >"); 
+    printf("<  The outcome would be..   >"); 
     usleep(1000000); 
     gotoxy(41, 1);
-    printf("<  The outcome would always be...  >");
+    printf("<  The outcome would be...  >");
+
+    usleep(2000000);
+
+    gotoxy(43, 0);
+    printf("_________________________");
+    gotoxy(43, 2);
+    printf("-------------------------");
+    gotoxy(44, 3);
+    printf("/");
+    gotoxy(43, 4);
+    printf("/");
+    gotoxy(41, 1);
+    printf("<  The outcome would be     >"); 
+    usleep(1000000); 
+    gotoxy(41, 1);
+    printf("<  The outcome would be.    >"); 
+    usleep(1000000); 
+    gotoxy(41, 1);
+    printf("<  The outcome would be..   >"); 
+    usleep(1000000); 
+    gotoxy(41, 1);
+    printf("<  The outcome would be...  >");
+
+    usleep(2000000);
+    gotoxy(43, 0);
+    printf("_______________                     ");
+    gotoxy(41, 1);
+    printf("<"); SetColorAndBackground(9, 0); printf("         ____   "); ResetColor(); printf(">             ");
+    gotoxy(41, 2);
+    printf("<"); SetColorAndBackground(9, 0); printf("  ___   ( __ \\  "); ResetColor(); printf(">             ");
+    gotoxy(41, 3);
+    printf("<"); SetColorAndBackground(9, 0); printf(" (___)   (__ (  "); ResetColor(); printf(">             ");
+    gotoxy(41, 4);
+    printf("<"); SetColorAndBackground(9,0); printf("        (____/  "); ResetColor(); printf(">             ");
+    gotoxy(43, 5);
+    printf("---------------                     ");
+    gotoxy(44, 6);
+    printf("/");
+    gotoxy(43, 7);
+    printf("/");
 
     getch();
+
+
 }
 
 
