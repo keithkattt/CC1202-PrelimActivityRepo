@@ -16,8 +16,7 @@ int main() {
     system("cls");
     wizard();
     textBubble();
-
-    
+    system("cls");
 
     return 0;
 }
