@@ -33,7 +33,7 @@ void acknowledgement(){
     for (int i = 0; i < headerSize; i++) {
         gotoxy(20, headerHeight++);
         printf("%s\n", header[i]); // Print the current line
-        usleep(100000);            // 50 milliseconds delay between lines
+        usleep(200000);            // 200 milliseconds delay between lines
         
     }
     ResetColor();
@@ -63,24 +63,24 @@ void acknowledgement(){
     for (int i = 0; i < acknowledgementSize; i++) {
         gotoxy(18, acknowledgementHeight++);
         printf("%s\n", acknowledgement[i]); // Print the current line 
-        usleep(100000);            // 50 milliseconds delay between lines
+        usleep(200000);            // 200 milliseconds delay between lines
     }
         gotoxy(43, 21); 
         printf("Thank you for using our program"); usleep(1000000); printf("."); usleep(1000000); printf("."); usleep(1000000); printf(".");  
-        usleep(200000); printf("\n"); printf("\033[F\033[K");
+        usleep(1000000); printf("\n"); printf("\033[F\033[K");
 
 
     for (int i = 0; i < acknowledgementSize; i++) {
         printf("\033[F\033[K"); // ANSI escape codes to move cursor up and clear line
         fflush(stdout);         // Ensure output is updated immediately
-        usleep(100000);          // 50 milliseconds delay between lines
+        usleep(200000);          // 200 milliseconds delay between lines
     }
 
     for (int i = 0; i <= headerSize; i++) {
       
         printf("\033[F\033[K"); // ANSI escape codes to move cursor up and clear line
         fflush(stdout);         // Ensure output is updated immediately
-        usleep(100000);          // 50 milliseconds delay between lines
+        usleep(200000);          // 200 milliseconds delay between lines
     }
     
     
