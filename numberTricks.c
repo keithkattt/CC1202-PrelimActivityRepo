@@ -210,8 +210,6 @@ void textBubble(){
 
 }
 
-
-
 void wizard(){
     gotoxy(0, 1);
     printf("             o");
