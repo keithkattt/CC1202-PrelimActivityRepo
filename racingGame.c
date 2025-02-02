@@ -148,7 +148,6 @@ void race() {
     while(!finished) {
         system("cls");  // Clear screen to show updated race positions 
         
-        racingGameHeader();
         // Move each car forward by a random number between 1 and 3
         for(int i = 0; i < NUM_CARS; i++) {
             positions[i] += rand() % 3 + 1;  // Move car by a random distance (1 to 3)
@@ -174,7 +173,7 @@ void race() {
         }
        
         // Delay to simulate race timing
-        usleep(150000);  // delay 150 milliseconds or 0.15 seconds
+        usleep(90000);  // delay 90 milliseconds or 0.09 seconds
     }
 
     // Display the ranking after the race
