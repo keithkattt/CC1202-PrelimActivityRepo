@@ -41,18 +41,20 @@ void acknowledgement(){
     
     const char *acknowledgement[] = {
         " __________________________________________________________________________________________", 
-        "|  Splash, Menu, Acknowledgement, Debugging:                                               |",
+        "|  Menu, Acknowledgement, Debugging:                                                       |",
         "|  Keith Arwil Umali || 0961 279 8645 || keith110606@gmail.com || BSCS-DS-1A               |",
+        "|__________________________________________________________________________________________|",
+        "|  Splash by:                                                                              |"  
+        "|  Allyn Castanales Tubice || 0963 352 2935 || allyntubics526@gmail.com || BSCS-DS-1A      |",   
         "|__________________________________________________________________________________________|",
         "|  Guessing Game by:                                                                       |",
         "|  Lance Aclan || 0967 276 0722 || lancemercadoaclan@gmail.com || BSCS-DS-1A               |",
         "|__________________________________________________________________________________________|",
         "|  Number Tricks by:                                                                       |",
         "|  Angelie Joy Macabuhay || 0905 316 4853 || angeliejoymacabuhay@gmail.com BSCS-DS-1A      |",
-        "|__________________________________________________________________________________________|",
+        "|__________________________________________________________________________________________|"   
         "|  Racing Game by:                                                                         |",
         "|  Hannah Kim Tominez || 0962 793 0143 || tominezhannah800@gmail.com || BSCS-DS-1A         |",
-        "|  Allyn Castanales Tubice || 0962 793 0143 || tominezhannah800@gmail.com || BSCS-DS-1A    |",                                                                                               
         "|__________________________________________________________________________________________|",
     };
     

@@ -155,13 +155,13 @@ void textBubble(){
     printf("/");
     gotoxy(41, 1);
     printf("<  The outcome would be     >                 "); 
-    usleep(1000000); 
+    usleep(800000); 
     gotoxy(41, 1);
     printf("<  The outcome would be.    >"); 
-    usleep(1000000); 
+    usleep(800000); 
     gotoxy(41, 1);
     printf("<  The outcome would be..   >"); 
-    usleep(1000000); 
+    usleep(800000); 
     gotoxy(41, 1);
     printf("<  The outcome would be...  >");
 
@@ -177,17 +177,17 @@ void textBubble(){
     printf("/");
     gotoxy(41, 1);
     printf("<  The outcome would be     >"); 
-    usleep(1000000); 
+    usleep(800000); 
     gotoxy(41, 1);
     printf("<  The outcome would be.    >"); 
-    usleep(1000000); 
+    usleep(800000); 
     gotoxy(41, 1);
     printf("<  The outcome would be..   >"); 
-    usleep(1000000); 
+    usleep(800000); 
     gotoxy(41, 1);
     printf("<  The outcome would be...  >");
 
-    usleep(2000000);
+    usleep(900000);
     gotoxy(43, 0);
     printf("_______________                     ");
     gotoxy(41, 1);
@@ -205,7 +205,7 @@ void textBubble(){
     gotoxy(43, 7);
     printf("/");
 
-    getch();
+    _getch();
 
 
 }

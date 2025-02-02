@@ -87,11 +87,11 @@ void guessingGameMenu(int choice){
     if (choice == 1){
         gotoxy(55, 13);
         SetColorAndBackground(14, 0);
-        printf("-> 1. Start Game");
+        printf("-> 1. Start Guessing Game");
         ResetColor();
     } else {
         gotoxy(55, 13);
-        printf("   1. Start Game");
+        printf("   1. Start Guessing Game");
     }
 
     if (choice == 2){

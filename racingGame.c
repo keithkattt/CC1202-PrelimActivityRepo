@@ -16,16 +16,63 @@
 // Function declarations
 void printInstructions();
 void race();
-void menu();
+void menu(int choice);
 void displayRaceTrack(int positions[NUM_CARS], char carSymbols[NUM_CARS][10]);
 void displayRanking(int positions[NUM_CARS], char cars[NUM_CARS]);
 void gotoxy();
 void SetColorAndBackground();
 void PrintEffect(const char *str, int delay);
 void resetColor(); 
+void racingGameHeader();
+void racingGameRound();
+
 
 int main() {
-    menu(); // Start the program menu
+    int choice = 1;
+    char key;
+
+    while (1){
+        menu(choice);
+        
+        key = _getch();
+
+        if (key == UP_ARROW) {
+                choice--;
+            if (choice < 1){
+                choice = 2;
+            } 
+        } else if (key == DOWN_ARROW) {
+            choice++;
+
+            if (choice > 2){
+                choice = 1;
+            }
+        } else if (key == ENTER_KEY) {
+            
+            switch(choice) {
+                case 1:
+                    gotoxy(60, 17);
+                    PrintEffect("Starting Game...\n", 10);
+                    usleep(1000000);  // Delay for 1 second
+                    system("cls");
+
+                    race();
+                    break;
+                case 2:
+                
+                    gotoxy(60, 17);
+                    PrintEffect("Exiting the game...\n", 10);
+                    usleep(1000000);  // Delay for 1 second
+
+                    system("cls");
+                    exit(0);
+
+                default:
+                    PrintEffect("Invalid choice. Please try again.\n", 5);
+                }
+        }
+    }
+
     resetColor();  // Reset text color to default   
     return 0;
 }
@@ -58,55 +105,33 @@ void gotoxy(int x, int y) //function definition
     }
 
 // Main menu to manage operations
-void menu() {
-    int choice;
-    
-    while(1) {
-    	system("cls");
-        gotoxy(10, 0);
-        SetColorAndBackground(11, 0);  // Set text color to bright cyan
-        printf(" /$$$$$$$                      /$$                            /$$$$$$                                   \n");
-        gotoxy(10, 1);
-        printf("| $$__  $$                    |__/                           /$$__  $$                                  \n");
-        gotoxy(10, 2);
-        printf("| $$  \\ $$  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$  \\__/  /$$$$$$  /$$$$$$/$$$$   /$$$$$$ \n");
-        gotoxy(10, 3);
-        printf("| $$$$$$$/ |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$ /$$$$ |____  $$| $$_  $$_  $$ /$$__  $$\n");
-        gotoxy(10, 4);
-        printf("| $$__  $$  /$$$$$$$| $$      | $$| $$  \\ $$| $$  \\ $$      | $$|_  $$  /$$$$$$$| $$ \\ $$ \\ $$| $$$$$$$$\n");
-        gotoxy(10, 5);
-        printf("| $$  \\ $$ /$$__  $$| $$      | $$| $$  | $$| $$  | $$      | $$  \\ $$ /$$__  $$| $$ | $$ | $$| $$_____/\n");
-        gotoxy(10, 6);
-        printf("| $$  | $$|  $$$$$$$|  $$$$$$$| $$| $$  | $$|  $$$$$$$      |  $$$$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$\n");
-        gotoxy(10, 7);
-        printf("|__/  |__/ \\_______/ \\_______/|__/|__/  |__/ \\____  $$       \\______/  \\_______/|__/ |__/ |__/ \\_______/\n");
-        gotoxy(10, 8);
-        printf("                                             /$$  \\ $$                                                  \n");
-        gotoxy(10, 9);
-        printf("                                            |  $$$$$$/                                                  \n");
-        gotoxy(10, 10);
-        printf("                                             \\______/                                                   \n");
-       	gotoxy(60, 13);
-	    PrintEffect("1. Start Race", 10);
-        gotoxy(60, 14);
-		PrintEffect("2. Exit", 10);
-        gotoxy(60, 15);
-		PrintEffect("Enter your choice: ", 10);
-        scanf("%d", &choice);
+void menu(int choice) {
 
-        switch(choice) {
-            case 1:
-                race();
-                break;
-            case 2:
-                gotoxy(60, 17);
-                PrintEffect("Exiting the game...\n", 5);
-                return;
-            default:
-                printf("Invalid choice. Please try again.\n");
+    	system("cls");
+        racingGameHeader();
+
+        if (choice == 1){
+            gotoxy(55, 13);
+            SetColorAndBackground(14, 0);
+            printf("-> 1. Start Racing Game");
+            resetColor();
+        } else {
+            gotoxy(55, 13);
+            printf("   1. Start Racing Game");
         }
-    }                          
+
+        if (choice == 2){
+            gotoxy(55, 14);
+            SetColorAndBackground(14, 0);
+            printf("-> 2. Exit Racing Game");
+            resetColor();
+        } else {
+            gotoxy(55, 14);
+            printf("   2. Exit Racing Game");
+        }
+                  
 }
+
 
 // Function to print the instructions
 void printInstructions() {
@@ -132,9 +157,12 @@ void race() {
         "[=CarD>}",   // Car D
         "[=CarE>}"    // Car E
     };
-    int finished = 0;  
-
-    printInstructions();
+    
+    int finished = 0;
+      
+    racingGameHeader();
+     
+    printInstructions(); //prints the instructions
     PrintEffect("\nPress any key to start...", 10);
     _getch();  // Wait for user input to start
 
@@ -147,6 +175,7 @@ void race() {
     while(!finished) {
         system("cls");  // Clear screen to show updated race positions 
         
+        racingGameHeader();
         // Move each car forward by a random number between 1 and 3
         for(int i = 0; i < NUM_CARS; i++) {
             positions[i] += rand() % 3 + 1;  // Move car by a random distance (1 to 3)
@@ -172,7 +201,7 @@ void race() {
         }
        
         // Delay to simulate race timing
-        usleep(150000);  // Sleep for 1 second
+        usleep(150000);  // delay 150 milliseconds or 0.15 seconds
     }
 
     // Display the ranking after the race
@@ -183,30 +212,8 @@ void race() {
 // Function to display the race track with car positions
 void displayRaceTrack(int positions[NUM_CARS], char carSymbols[NUM_CARS][10]) {
     
-        SetColorAndBackground(11, 0);  // Set text color to bright cyan
-        gotoxy(10, 0);
-        printf(" /$$$$$$$                      /$$                            /$$$$$$                                   \n");
-        gotoxy(10, 1);
-        printf("| $$__  $$                    |__/                           /$$__  $$                                  \n");
-        gotoxy(10, 2);
-        printf("| $$  \\ $$  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$  \\__/  /$$$$$$  /$$$$$$/$$$$   /$$$$$$ \n");
-        gotoxy(10, 3);
-        printf("| $$$$$$$/ |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$ /$$$$ |____  $$| $$_  $$_  $$ /$$__  $$\n");
-        gotoxy(10, 4);
-        printf("| $$__  $$  /$$$$$$$| $$      | $$| $$  \\ $$| $$  \\ $$      | $$|_  $$  /$$$$$$$| $$ \\ $$ \\ $$| $$$$$$$$\n");
-        gotoxy(10, 5);
-        printf("| $$  \\ $$ /$$__  $$| $$      | $$| $$  | $$| $$  | $$      | $$  \\ $$ /$$__  $$| $$ | $$ | $$| $$_____/\n");
-        gotoxy(10, 6);
-        printf("| $$  | $$|  $$$$$$$|  $$$$$$$| $$| $$  | $$|  $$$$$$$      |  $$$$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$\n");
-        gotoxy(10, 7);
-        printf("|__/  |__/ \\_______/ \\_______/|__/|__/  |__/ \\____  $$       \\______/  \\_______/|__/ |__/ |__/ \\_______/\n");
-        gotoxy(10, 8);
-        printf("                                             /$$  \\ $$                                                  \n");
-        gotoxy(10, 9);
-        printf("                                            |  $$$$$$/                                                  \n");
-        gotoxy(10, 10);
-        printf("                                             \\______/                                                   \n");
-        resetColor();
+    //display header for racing game
+       
     
     
     SetColorAndBackground(3, 0);  // Set text color to cyan
@@ -281,4 +288,32 @@ void displayRanking(int positions[NUM_CARS], char cars[NUM_CARS]) {
     usleep(500000);  // Sleep for 0.5 seconds
 
 }
+
+void racingGameHeader(){
+     SetColorAndBackground(11, 0);  // Set text color to bright cyan
+        gotoxy(10, 0);
+        printf(" /$$$$$$$                      /$$                            /$$$$$$                                   \n");
+        gotoxy(10, 1);
+        printf("| $$__  $$                    |__/                           /$$__  $$                                  \n");
+        gotoxy(10, 2);
+        printf("| $$  \\ $$  /$$$$$$   /$$$$$$$ /$$ /$$$$$$$   /$$$$$$       | $$  \\__/  /$$$$$$  /$$$$$$/$$$$   /$$$$$$ \n");
+        gotoxy(10, 3);
+        printf("| $$$$$$$/ |____  $$ /$$_____/| $$| $$__  $$ /$$__  $$      | $$ /$$$$ |____  $$| $$_  $$_  $$ /$$__  $$\n");
+        gotoxy(10, 4);
+        printf("| $$__  $$  /$$$$$$$| $$      | $$| $$  \\ $$| $$  \\ $$      | $$|_  $$  /$$$$$$$| $$ \\ $$ \\ $$| $$$$$$$$\n");
+        gotoxy(10, 5);
+        printf("| $$  \\ $$ /$$__  $$| $$      | $$| $$  | $$| $$  | $$      | $$  \\ $$ /$$__  $$| $$ | $$ | $$| $$_____/\n");
+        gotoxy(10, 6);
+        printf("| $$  | $$|  $$$$$$$|  $$$$$$$| $$| $$  | $$|  $$$$$$$      |  $$$$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$\n");
+        gotoxy(10, 7);
+        printf("|__/  |__/ \\_______/ \\_______/|__/|__/  |__/ \\____  $$       \\______/  \\_______/|__/ |__/ |__/ \\_______/\n");
+        gotoxy(10, 8);
+        printf("                                             /$$  \\ $$                                                  \n");
+        gotoxy(10, 9);
+        printf("                                            |  $$$$$$/                                                  \n");
+        gotoxy(10, 10);
+        printf("                                             \\______/                                                   \n");
+        resetColor();
+}
+
 
