@@ -17,15 +17,11 @@ int randomNum();//Generates random num from 1 - 100, parameter for how many time
 int userInput(); //Prompts the user and returns the value
 void guessingGameHeader(); //Prints ASCII art
 void welcomeMessage(); //Prints welcome message
-void PrintEffect(const char *str, int delay); //Prints in style
-void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 256
-void ResetColor(); //Resets the color and background
 void GuessingGameRound(); //Main function
 void guessingGame(); //Main function
 void guessingGameMenu(); //Display keybinded Menu 
-void gotoxy(int x, int y); //Moves the cursor to the x and y coordinates
 
-int main(){
+void mainGuessingGame(){
     int choice = 1;
     char key;
 
@@ -50,8 +46,8 @@ int main(){
             
             switch(choice) {
                 case 1:
-                    gotoxy(60, 17);
-                    PrintEffect("Starting Game...\n", 10);
+                    gotoxy(52, 17);
+                    PrintEffect("Starting Guessing game...\n", 10);
                     usleep(1000000);  // Delay for 1 second
                     system("cls");
 
@@ -59,12 +55,12 @@ int main(){
                     break;
                 case 2:
                 
-                    gotoxy(60, 17);
-                    PrintEffect("Exiting the game...\n", 10);
+                    gotoxy(52, 17);
+                    PrintEffect("Exiting Guessing game...\n", 10);
                     usleep(1000000);  // Delay for 1 second
 
                     system("cls");
-                    exit(0);
+                    return;
 
                 default:
                     PrintEffect("Invalid choice. Please try again.\n", 5);
@@ -73,34 +69,25 @@ int main(){
     }
 }
 
-void gotoxy(int x, int y){
-    COORD xyPos = {0, 0};
-    xyPos.X = x;
-    xyPos.Y = y;
-
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), xyPos);
-    return;
-}
-
 void guessingGameMenu(int choice){
     
     if (choice == 1){
-        gotoxy(55, 13);
+        gotoxy(50, 13);
         SetColorAndBackground(14, 0);
         printf("-> 1. Start Guessing Game");
         ResetColor();
     } else {
-        gotoxy(55, 13);
+        gotoxy(50, 13);
         printf("   1. Start Guessing Game");
     }
 
     if (choice == 2){
-        gotoxy(55, 14);
+        gotoxy(50, 14);
         SetColorAndBackground(14, 0);
         printf("-> 2. Exit Guessing Game");
         ResetColor();
     } else {
-        gotoxy(55, 14);
+        gotoxy(50, 14);
         printf("   2. Exit Guessing Game");
     }
 
@@ -223,28 +210,17 @@ void guessingGameHeader(){
     SetColorAndBackground(14, 0);
     system("cls");
     putchar('\n');
-    gotoxy(3, 0);
-    printf(" $$$$$$\\                                          $$\\                            $$$$$$\\                                    ");
-    gotoxy(3, 1);
-    printf("$$  __$$\\                                         \\__|                          $$  __$$\\                                   ");
-    gotoxy(3, 2);
-    printf("$$ /  \\__|$$\\   $$\\  $$$$$$\\   $$$$$$$\\  $$$$$$$\\ $$\\ $$$$$$$\\   $$$$$$\\        $$ /  \\__| $$$$$$\\  $$$$$$\\$$$$\\   $$$$$$\\  ");
-    gotoxy(3, 3);
-    printf("$$ |$$$$\\ $$ |  $$ |$$  __$$\\ $$  _____|$$  _____|$$ |$$  __$$\\ $$  __$$\\       $$ |$$$$\\  \\____$$\\ $$  _$$  _$$\\ $$  __$$\\ ");
-    gotoxy(3, 4);
-    printf("$$ |\\_$$ |$$ |  $$ |$$$$$$$$ |\\$$$$$$\\  \\$$$$$$\\  $$ |$$ |  $$ |$$ /  $$ |      $$ |\\_$$ | $$$$$$$ |$$ / $$ / $$ |$$$$$$$$ |");
-    gotoxy(3, 5);
-    printf("$$ |  $$ |$$ |  $$ |$$   ____| \\____$$\\  \\____$$\\ $$ |$$ |  $$ |$$ |  $$ |      $$ |  $$ |$$  __$$ |$$ | $$ | $$ |$$   ____|");
-    gotoxy(3, 6);
-    printf("\\$$$$$$  |\\$$$$$$  |\\$$$$$$$\\ $$$$$$$  |$$$$$$$  |$$ |$$ |  $$ |\\$$$$$$$ |      \\$$$$$$  |\\$$$$$$$ |$$ | $$ | $$ |\\$$$$$$$\\ ");
-    gotoxy(3, 7);
-    printf(" \\______/  \\______/  \\_______|\\_______/ \\_______/ \\__|\\__|  \\__| \\____$$ |       \\______/  \\_______|\\__| \\__| \\__| \\_______|");
-    gotoxy(3, 8);
-    printf("                                                                $$\\   $$ |                                                  ");
-    gotoxy(3, 9);
-    printf("                                                                \\$$$$$$  |                                                  ");
-    gotoxy(3, 10);
-    printf("                                                                 \\______/                                                   ");
+    gotoxy(3, 0); printf(" $$$$$$\\                                          $$\\                            $$$$$$\\                                    ");
+    gotoxy(3, 1); printf("$$  __$$\\                                         \\__|                          $$  __$$\\                                   ");
+    gotoxy(3, 2); printf("$$ /  \\__|$$\\   $$\\  $$$$$$\\   $$$$$$$\\  $$$$$$$\\ $$\\ $$$$$$$\\   $$$$$$\\        $$ /  \\__| $$$$$$\\  $$$$$$\\$$$$\\   $$$$$$\\  ");
+    gotoxy(3, 3); printf("$$ |$$$$\\ $$ |  $$ |$$  __$$\\ $$  _____|$$  _____|$$ |$$  __$$\\ $$  __$$\\       $$ |$$$$\\  \\____$$\\ $$  _$$  _$$\\ $$  __$$\\ ");
+    gotoxy(3, 4); printf("$$ |\\_$$ |$$ |  $$ |$$$$$$$$ |\\$$$$$$\\  \\$$$$$$\\  $$ |$$ |  $$ |$$ /  $$ |      $$ |\\_$$ | $$$$$$$ |$$ / $$ / $$ |$$$$$$$$ |");
+    gotoxy(3, 5); printf("$$ |  $$ |$$ |  $$ |$$   ____| \\____$$\\  \\____$$\\ $$ |$$ |  $$ |$$ |  $$ |      $$ |  $$ |$$  __$$ |$$ | $$ | $$ |$$   ____|");
+    gotoxy(3, 6); printf("\\$$$$$$  |\\$$$$$$  |\\$$$$$$$\\ $$$$$$$  |$$$$$$$  |$$ |$$ |  $$ |\\$$$$$$$ |      \\$$$$$$  |\\$$$$$$$ |$$ | $$ | $$ |\\$$$$$$$\\ ");
+    gotoxy(3, 7); printf(" \\______/  \\______/  \\_______|\\_______/ \\_______/ \\__|\\__|  \\__| \\____$$ |       \\______/  \\_______|\\__| \\__| \\__| \\_______|");
+    gotoxy(3, 8); printf("                                                                $$\\   $$ |                                                  ");
+    gotoxy(3, 9); printf("                                                                \\$$$$$$  |                                                  ");
+    gotoxy(3, 10); printf("                                                                 \\______/                                                   ");
     printf("\n\n");
     ResetColor();
 }
@@ -270,22 +246,5 @@ void welcomeMessage(){
         ResetColor();
 }
     
-void PrintEffect(const char *str, int delay){
-    for(int i = 0; str[i] != '\0'; i++){
-        printf("%c", str[i]);
-        Sleep(delay);
-    }
-}
-
-void SetColorAndBackground(int ForgC, int BackC)
-{
-     WORD wColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
-     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), wColor);
-     return;
-}
-
-void ResetColor(){
-    SetColorAndBackground(7, 0);
-}
 
 

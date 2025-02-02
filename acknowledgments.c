@@ -4,18 +4,8 @@
 #include <conio.h>
 #include <stdlib.h>
 
-void gotoxy(int x, int y);
-void SetColorAndBackground(int ForgC, int BackC);
-void ResetColor();
-void PrintEffect(const char *str, int delay);
-void acknowledgement();
 
-int main(){
-    acknowledgement();
-    return 0;
-}
-
-void acknowledgement(){
+void mainAcknowledgement(){
     system("cls");
     SetColorAndBackground(6, 0); 
     const char *header[] = {
@@ -44,7 +34,7 @@ void acknowledgement(){
         "|  Menu, Acknowledgement, Debugging:                                                       |",
         "|  Keith Arwil Umali || 0961 279 8645 || keith110606@gmail.com || BSCS-DS-1A               |",
         "|__________________________________________________________________________________________|",
-        "|  Splash by:                                                                              |"  
+        "|  Splash by:                                                                              |",  
         "|  Allyn Castanales Tubice || 0963 352 2935 || allyntubics526@gmail.com || BSCS-DS-1A      |",   
         "|__________________________________________________________________________________________|",
         "|  Guessing Game by:                                                                       |",
@@ -52,7 +42,7 @@ void acknowledgement(){
         "|__________________________________________________________________________________________|",
         "|  Number Tricks by:                                                                       |",
         "|  Angelie Joy Macabuhay || 0905 316 4853 || angeliejoymacabuhay@gmail.com BSCS-DS-1A      |",
-        "|__________________________________________________________________________________________|"   
+        "|__________________________________________________________________________________________|",  
         "|  Racing Game by:                                                                         |",
         "|  Hannah Kim Tominez || 0962 793 0143 || tominezhannah800@gmail.com || BSCS-DS-1A         |",
         "|__________________________________________________________________________________________|",
@@ -67,7 +57,7 @@ void acknowledgement(){
         printf("%s\n", acknowledgement[i]); // Print the current line 
         usleep(200000);            // 200 milliseconds delay between lines
     }
-        gotoxy(43, 21); 
+        gotoxy(43, 23); 
         printf("Thank you for using our program"); usleep(1000000); printf("."); usleep(1000000); printf("."); usleep(1000000); printf(".");  
         usleep(1000000); printf("\n"); printf("\033[F\033[K");
 
@@ -86,31 +76,4 @@ void acknowledgement(){
     }
     
     
-}
-
-
-void gotoxy(int x, int y) {
-    
-    COORD xyPos = {0, 0};
-    xyPos.X = x;
-    xyPos.Y = y;
-
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), xyPos);
-    return;
-}
-
-void SetColorAndBackground(int ForgC, int BackC) {
-    WORD wColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), wColor);
-}
-
-void ResetColor() {
-    SetColorAndBackground(15, 0); // Reset text color to white and background to black
-}
-
-void PrintEffect(const char *str, int delay) {
-    for(int i = 0; str[i] != '\0'; i++) {
-        printf("%c", str[i]);
-        Sleep(delay);
-    }
 }

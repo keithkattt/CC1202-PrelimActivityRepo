@@ -3,91 +3,87 @@
 #include <conio.h>
 #include <windows.h>
 
+#include "functions.h"
+#include "splash.c"
+#include "acknowledgments.c"
+#include "guessingGame.c"
+#include "numberTricks.c"
+#include "racingGame.c"
+
 #define ENTER_KEY 13
 #define UP_ARROW 72
 #define DOWN_ARROW 80
 
-void SetColorAndBackground(int ForgC, int BackC);
-void gotoxy(int x, int y);
 void displayMenu(int option);
 void mainMenu();
 
 int main() {
+    mainSplash();
     mainMenu();
+    mainAcknowledgement();
     return 0;
-}
-
-void SetColorAndBackground(int ForgC, int BackC) {
-    WORD wColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), wColor);
-}
-
-void gotoxy(int x, int y) {
-    COORD xyPos = {0, 0};
-    xyPos.X = x;
-    xyPos.Y = y;
-
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), xyPos);
-    return;
 }
 
 void displayMenu(int option) { 
     system("cls");
     
     //ASCII art Main Menu
+    SetColorAndBackground(6, 0);
+    gotoxy(40, 1);
+    printf("  __  __       _         __  __                  ");
+    gotoxy(40, 2);
+    printf(" |  \\/  |     (_)       |  \\/  |                 ");
+    gotoxy(40, 3);
+    printf(" | \\  / | __ _ _ _ __   | \\  / | ___ _ __  _   _ ");
+    gotoxy(40, 4);
+    printf(" | |\\/| |/ _` | | '_ \\  | |\\/| |/ _ \\ '_ \\| | | |");
+    gotoxy(40, 5);
+    printf(" | |  | | (_| | | | | | | |  | |  __/ | | | |_| |");
+    gotoxy(40, 6);
+    printf(" |_|  |_|\\__,_|_|_| |_| |_|  |_|\\___|_| |_|\\__,_|");
+    gotoxy(40, 7);
+    printf("                                                 ");
+    gotoxy(40, 8);
+    printf("                                                 ");
     SetColorAndBackground(15, 0);
-    gotoxy(45, 1);
-    printf(" __  __       _         __  __                  ");
-    gotoxy(45, 2);
-    printf("|  \\/  |     (_)       |  \\/  |                 ");   
-    gotoxy(45, 3);
-    printf("| \\  / | __ _ _ _ __   | \\  / | ___ _ __  _   _ ");
-    gotoxy(45, 4);
-    printf("| |\\/| |/ _` | | '_ \\  | |\\/| |/ _ \\ '_ \\| | | |");
-    gotoxy(45, 5);
-    printf("| |  | | (_| | | | | | | |  | |  __/ | | | |_| |");
-    gotoxy(45, 6);
-    printf("|_|  |_|\\__,_|_|_| |_| |_|  |_|\\___|_| |_|\\__,_|");
-
-
 
     if (option == 1) {
-        gotoxy(60, 8);
+        gotoxy(52, 9);
         SetColorAndBackground(14, 0);
         printf("-> 1. Guessing Game\n");
         SetColorAndBackground(15, 0);
     } else {
-        gotoxy(60, 8);
+        gotoxy(52, 9);
         printf("   1. Guessing Game\n");
     } 
     
     if (option == 2) {
-        gotoxy(60, 9);
+        gotoxy(52, 10);
         SetColorAndBackground(14, 0);
         printf("-> 2. Number Tricks\n");
         SetColorAndBackground(15, 0);
     } else {
-        gotoxy(60, 9);
+        gotoxy(52, 10);
         printf("   2. Number Tricks\n");
     }
 
     if (option == 3) {
-        gotoxy(60, 10);
+        gotoxy(52, 11);
         SetColorAndBackground(14, 0);
         printf("-> 3. Racing Game\n");
         SetColorAndBackground(15, 0);
     } else {
-        gotoxy(60, 10);
+        gotoxy(52, 11);
         printf("   3. Racing Game\n");
     }
 
     if (option == 4) {
-        gotoxy(60, 11);
+        gotoxy(52, 12);
         SetColorAndBackground(14, 0);
         printf("-> 4. Exit\n");
         SetColorAndBackground(15, 0);
     } else {
-        gotoxy(60, 11);
+        gotoxy(52, 12);
         printf("   4. Exit\n");
     }
 
@@ -116,16 +112,30 @@ void mainMenu() {
             }
         } else if (key == ENTER_KEY) {
             if (option == 4) {
-                gotoxy(60, 13);
+                gotoxy(55, 14);
                 printf("Exiting program"); usleep(300000); printf(".");  usleep(300000); printf("."); usleep(300000); printf(".");   
                 usleep(1000000); 
                 system("cls");
                 break;
             }
 
-            gotoxy(60, 13);
-            printf("Starting: %s", game[option - 1]); usleep(300000); printf(".");  usleep(300000); printf("."); usleep(300000); printf(".");   
-            _getch(); // Wait for a key press to return to the menu
+            if (option == 1){
+                gotoxy(52, 14);
+                printf("Starting: %s", game[option - 1]); usleep(300000); printf(".");  usleep(300000); printf("."); usleep(300000); printf(".");   
+                mainGuessingGame();
+            }
+
+            if (option == 2){
+                gotoxy(52, 14);
+                printf("Starting: %s", game[option - 1]); usleep(300000); printf(".");  usleep(300000); printf("."); usleep(300000); printf(".");   
+                mainNumberTricks();
+            }
+
+            if (option == 3){
+                gotoxy(52, 14);
+                printf("Starting: %s", game[option - 1]); usleep(300000); printf(".");  usleep(300000); printf("."); usleep(300000); printf(".");   
+                mainRacingGame();
+            }
         }
     }
 }

@@ -4,21 +4,116 @@
 #include <unistd.h>
 #include <time.h>
 
-int randomNum();//Generates random num from 1 - 3, parameter for how many times you use it 
-void gotoxy(int x, int y);//Moves the cursor to the x and y coordinates
-void PrintEffect(const char *str, int delay); //Prints in style
-void SetColorAndBackground(int ForgC, int BackC); ////color value range 0 up-to 15 
-void ResetColor(); //Resets the color and background
-void wizard(); //Displays Merlin the Wizard
-void textBubble(); //text bubbles for Merlin the Wizard
+#define ENTER_KEY 13
+#define UP_ARROW 72
+#define DOWN_ARROW 80
 
-int main() {
+
+void wizard(); //Displays Merlin the Wizard
+void numberTricksMenu(); //Main menu algorithm for number trick
+void inputMenuChoice(int choice); //Displays and updates main menu
+void textBubble(); //text bubbles for Merlin the Wizard
+void numberTricksHeader();
+void numberTricksRound ();
+
+void mainNumberTricks(){
+    numberTricksMenu();
+}
+
+void numberTricksRound() {
     system("cls");
     wizard();
     textBubble();
     system("cls");
+}
 
-    return 0;
+void numberTricksMenu(){
+    system("cls");
+    int choice = 1;
+    char key;
+
+    while (1){
+        numberTricksHeader();
+        inputMenuChoice(choice);
+        
+        key = _getch();
+
+        if (key == UP_ARROW) {
+                choice--;
+            if (choice < 1){
+                choice = 2;
+            } 
+        } else if (key == DOWN_ARROW) {
+            choice++;
+
+            if (choice > 2){
+                choice = 1;
+            }
+        } else if (key == ENTER_KEY) {
+            
+            switch(choice) {
+                case 1:
+                    gotoxy(52, 17);
+                    PrintEffect("Starting Number Tricks...\n", 10);
+                    usleep(1000000);  // Delay for 1 second
+                    system("cls");
+
+                    numberTricksRound();
+                    break;
+                case 2:
+                
+                    gotoxy(52, 17);
+                    PrintEffect("Exiting Number Tricks...\n", 10);
+                    usleep(1000000);  // Delay for 1 second
+
+                    system("cls");
+                    return;
+
+                default:
+                    PrintEffect("Invalid choice. Please try again.\n", 5);
+            }
+        }
+    }
+}
+
+void inputMenuChoice(int choice){
+    if (choice == 1){
+        gotoxy(50, 13);
+        SetColorAndBackground(9, 0);
+        printf("-> 1. Start Number Tricks");
+        ResetColor();
+    } else {
+        gotoxy(50, 13);
+        printf("   1. Start Number Tricks");
+    }
+
+    if (choice == 2){
+        gotoxy(50, 14);
+        SetColorAndBackground(9, 0);
+        printf("-> 2. Exit Number Tricks");
+        ResetColor();
+    } else {
+        gotoxy(50, 14);
+        printf("   2. Exit Number Tricks");
+    }
+}
+
+void numberTricksHeader(){
+    
+    SetColorAndBackground(9, 0);
+    gotoxy(5, 0); printf(" /$$   /$$                         /$$                                   /$$               /$$           /$$                ");
+    gotoxy(5, 1); printf("| $$$ | $$                        | $$                                  | $$              |__/          | $$                ");
+    gotoxy(5, 2); printf("| $$$$| $$ /$$   /$$ /$$$$$$/$$$$ | $$$$$$$   /$$$$$$   /$$$$$$        /$$$$$$    /$$$$$$  /$$  /$$$$$$$| $$   /$$  /$$$$$$$");
+    gotoxy(5, 3); printf("| $$ $$ $$| $$  | $$| $$_  $$_  $$| $$__  $$ /$$__  $$ /$$__  $$      |_  $$_/   /$$__  $$| $$ /$$_____/| $$  /$$/ /$$_____/");
+    gotoxy(5, 4); printf("| $$  $$$$| $$  | $$| $$ \\ $$ \\ $$| $$  \\ $$| $$$$$$$$| $$  \\__/        | $$    | $$  \\__/| $$| $$      | $$$$$$/ |  $$$$$$ ");
+    gotoxy(5, 5); printf("| $$\\  $$$| $$  | $$| $$ | $$ | $$| $$  | $$| $$_____/| $$              | $$ /$$| $$      | $$| $$      | $$_  $$  \\____  $$");
+    gotoxy(5, 6); printf("| $$ \\  $$|  $$$$$$/| $$ | $$ | $$| $$$$$$$/|  $$$$$$$| $$              |  $$$$/| $$      | $$|  $$$$$$$| $$ \\  $$ /$$$$$$$/");
+    gotoxy(5, 7); printf("|__/  \\__/ \\______/ |__/ |__/ |__/|_______/  \\_______/|__/               \\___/  |__/      |__/ \\_______/|__/  \\__/|_______/ ");
+    gotoxy(5, 8); printf("                                                                                                                            ");
+    gotoxy(5, 9); printf("                                                                                                                            ");
+    gotoxy(5, 10); printf("                                                                                                                            ");
+    ResetColor();
+
 }
 
 void textBubble(){
@@ -165,29 +260,8 @@ void textBubble(){
     gotoxy(41, 1);
     printf("<  The outcome would be...  >");
 
-    usleep(2000000);
+    getch();
 
-    gotoxy(43, 0);
-    printf("_________________________");
-    gotoxy(43, 2);
-    printf("-------------------------");
-    gotoxy(44, 3);
-    printf("/");
-    gotoxy(43, 4);
-    printf("/");
-    gotoxy(41, 1);
-    printf("<  The outcome would be     >"); 
-    usleep(800000); 
-    gotoxy(41, 1);
-    printf("<  The outcome would be.    >"); 
-    usleep(800000); 
-    gotoxy(41, 1);
-    printf("<  The outcome would be..   >"); 
-    usleep(800000); 
-    gotoxy(41, 1);
-    printf("<  The outcome would be...  >");
-
-    usleep(900000);
     gotoxy(43, 0);
     printf("_______________                     ");
     gotoxy(41, 1);
@@ -206,8 +280,6 @@ void textBubble(){
     printf("/");
 
     _getch();
-
-
 }
 
 void wizard(){
@@ -271,31 +343,4 @@ void wizard(){
     printf("           ``'''`.              .'      `'^  `''---'^\n");
     gotoxy(0, 30);
     printf("                  `-..______..-'\n");
-}
-
-void gotoxy(int x, int y){
-    COORD xyPos = {0, 0};
-    xyPos.X = x;
-    xyPos.Y = y;
-
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), xyPos);
-    return;
-}
-
-void PrintEffect(const char *str, int delay){
-    for(int i = 0; str[i] != '\0'; i++){
-        printf("%c", str[i]);
-        Sleep(delay);
-    }
-}
-
-void SetColorAndBackground(int ForgC, int BackC)
-{
-     WORD wColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
-     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), wColor);
-     return;
-}
-
-void ResetColor(){
-    SetColorAndBackground(7, 0);
 }

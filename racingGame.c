@@ -5,6 +5,8 @@
 #include <unistd.h>  // For sleep function 
 #include <conio.h>
 
+
+
 #define NUM_CARS 5
 #define FINISH_LINE 100  // Finish line position
 #define TRACK_LENGTH 110  // Total track length
@@ -27,7 +29,7 @@ void racingGameHeader();
 void racingGameRound();
 
 
-int main() {
+void mainRacingGame() {
     int choice = 1;
     char key;
 
@@ -51,8 +53,8 @@ int main() {
             
             switch(choice) {
                 case 1:
-                    gotoxy(60, 17);
-                    PrintEffect("Starting Game...\n", 10);
+                    gotoxy(57, 17);
+                    PrintEffect("Starting Racing Game...\n", 10);
                     usleep(1000000);  // Delay for 1 second
                     system("cls");
 
@@ -60,12 +62,12 @@ int main() {
                     break;
                 case 2:
                 
-                    gotoxy(60, 17);
-                    PrintEffect("Exiting the game...\n", 10);
+                    gotoxy(57, 17);
+                    PrintEffect("Exiting Racing Game...\n", 10);
                     usleep(1000000);  // Delay for 1 second
 
                     system("cls");
-                    exit(0);
+                    return;
 
                 default:
                     PrintEffect("Invalid choice. Please try again.\n", 5);
@@ -74,35 +76,7 @@ int main() {
     }
 
     resetColor();  // Reset text color to default   
-    return 0;
 }
-
-void SetColorAndBackground(int ForgC, int BackC) {
-    WORD wColor = ((BackC & 0x0F) << 4) + (ForgC & 0x0F);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), wColor);
-    return;
-}
-
-void PrintEffect(const char *str, int delay) {
-    for(int i = 0; str[i] != '\0'; i++) {
-        printf("%c", str[i]);
-        Sleep(delay);
-    }
-}
-
-void resetColor() {
-    SetColorAndBackground(15, 0);
-    return;
-}
-
-void gotoxy(int x, int y) //function definition
-     {
-            COORD xyPos = {0, 0};   //initialization cursor position
-            xyPos.X = x;   xyPos.Y =  y;  //assign coordinates
-
-            SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),xyPos);
-            return;
-    }
 
 // Main menu to manage operations
 void menu(int choice) {
@@ -112,7 +86,7 @@ void menu(int choice) {
 
         if (choice == 1){
             gotoxy(55, 13);
-            SetColorAndBackground(14, 0);
+            SetColorAndBackground(11, 0);
             printf("-> 1. Start Racing Game");
             resetColor();
         } else {
@@ -122,7 +96,7 @@ void menu(int choice) {
 
         if (choice == 2){
             gotoxy(55, 14);
-            SetColorAndBackground(14, 0);
+            SetColorAndBackground(11, 0);
             printf("-> 2. Exit Racing Game");
             resetColor();
         } else {
@@ -131,7 +105,6 @@ void menu(int choice) {
         }
                   
 }
-
 
 // Function to print the instructions
 void printInstructions() {
@@ -161,7 +134,7 @@ void race() {
     int finished = 0;
       
     racingGameHeader();
-     
+
     printInstructions(); //prints the instructions
     PrintEffect("\nPress any key to start...", 10);
     _getch();  // Wait for user input to start
@@ -313,7 +286,7 @@ void racingGameHeader(){
         printf("                                            |  $$$$$$/                                                  \n");
         gotoxy(10, 10);
         printf("                                             \\______/                                                   \n");
-        resetColor();
+        ResetColor();
 }
 
 
